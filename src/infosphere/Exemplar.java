@@ -14,8 +14,8 @@ public class Exemplar extends Material {
     protected boolean emprestado;
     protected boolean reservado;
 
-    public Exemplar(String codigo, String nome, String descricao, String[] metadata) {
-        super(codigo, nome, descricao, metadata);
+    public Exemplar(String codigo, String nome, String descricao, String[] metadata, int numExemplares) {
+        super(codigo, nome, descricao, metadata, numExemplares);
         this.codigoExemplar = codigo;
         this.renovacoes = 0;
         this.emprestado = false;

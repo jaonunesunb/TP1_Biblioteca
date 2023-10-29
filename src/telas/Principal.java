@@ -29,41 +29,57 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnAcesso = new javax.swing.JMenu();
+        mntCadastro = new javax.swing.JMenuItem();
+        mntLogin = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mntSair = new javax.swing.JMenuItem();
+        mnMateriais = new javax.swing.JMenu();
+        mntAddMateriais = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/3d_library_folder_20529 (1).png")).getImage());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/3d_library_folder_20529 (1).png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel2.setText("Sistema InfoSphere");
 
-        jMenu1.setText("Acesso");
+        mnAcesso.setText("Acesso");
 
-        jMenuItem1.setText("Cadastrar");
-        jMenu1.add(jMenuItem1);
+        mntCadastro.setText("Cadastro");
+        mnAcesso.add(mntCadastro);
 
-        jMenuItem2.setText("Login");
-        jMenu1.add(jMenuItem2);
-        jMenu1.add(jSeparator1);
+        mntLogin.setText("Login");
+        mnAcesso.add(mntLogin);
+        mnAcesso.add(jSeparator1);
 
-        jMenuItem3.setText("Sair");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/log_out_icon_197724.png"))); // NOI18N
+        mntSair.setText("Sair");
+        mntSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mntSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        mnAcesso.add(mntSair);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnAcesso);
 
-        jMenu2.setText("Materiais");
-        jMenuBar1.add(jMenu2);
+        mnMateriais.setText("Materiais");
+
+        mntAddMateriais.setText("Adicionar materiais");
+        mntAddMateriais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mntAddMateriaisActionPerformed(evt);
+            }
+        });
+        mnMateriais.add(mntAddMateriais);
+
+        jMenuItem5.setText("Relatório de transações");
+        mnMateriais.add(jMenuItem5);
+
+        jMenuBar1.add(mnMateriais);
 
         setJMenuBar(jMenuBar1);
 
@@ -89,11 +105,16 @@ public class Principal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void mntSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mntSairActionPerformed
+
+    private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
+        new Materiais().setVisible(true);
+    }//GEN-LAST:event_mntAddMateriaisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,12 +154,14 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu mnAcesso;
+    private javax.swing.JMenu mnMateriais;
+    private javax.swing.JMenuItem mntAddMateriais;
+    private javax.swing.JMenuItem mntCadastro;
+    private javax.swing.JMenuItem mntLogin;
+    private javax.swing.JMenuItem mntSair;
     // End of variables declaration//GEN-END:variables
 }

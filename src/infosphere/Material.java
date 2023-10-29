@@ -14,12 +14,14 @@ public class Material {
     protected String descricao;
     protected String[] metadata;
     protected String tipoMaterial;
+    protected int numExemplares;
 
-    public Material(String codigoAcervo, String nome, String descricao, String[] metadata) {
+    public Material(String codigoAcervo, String nome, String descricao, String[] metadata, int numExemplares) {
         this.codigoAcervo = codigoAcervo;
         this.nome = nome;
         this.descricao = descricao;
         this.metadata = metadata;
+        this.numExemplares = numExemplares;
     }
 }
 
