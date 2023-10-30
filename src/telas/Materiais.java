@@ -15,9 +15,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Materiais extends javax.swing.JFrame {
     static ArrayList<Material> listaMateriais;
+    String[] metadata = new String[6];
     //String[] tiposDeMateriais = {"Livros", "Periódicos", "Lúdicos", "Audiovisuais", "Sonoros"};
     String botao;
-    String metadata[];
     /**
      * Creates new form Materiais
      */
@@ -33,12 +33,14 @@ public class Materiais extends javax.swing.JFrame {
         btnExcluirMaterial.setEnabled(false);
         btnPesquisarMaterial.setEnabled(true);
         btnOkMaterial.setEnabled(false);
-        
-         // habilitar ou desabilitar texto
-         txtCodAcervo.setEnabled(false);
-         txtNomeMaterial.setEnabled(false);
-         txaDescricaoMaterial.setEnabled(false);
-          txtTitulo.setEnabled(false);
+
+        // habilitar ou desabilitar texto
+        txtCodAcervo.setEnabled(false);
+        txtNomeMaterial.setEnabled(false);
+        txaDescricaoMaterial.setEnabled(false);
+        txtTitulo.setEnabled(false);
+        txtTipo.setEnabled(false);
+        txtEditora.setEnabled(false);
         txtAutores.setEnabled(false);
         txtAnoPublicacao.setEnabled(false);
         txtClassificacaoIndicativa.setEnabled(false);
@@ -160,29 +162,11 @@ public class Materiais extends javax.swing.JFrame {
 
         jLabel6.setText("Autor");
 
-        txtAutores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAutoresActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("Ano de publicação");
 
         jLabel8.setText("Idioma");
 
-        txtIdioma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdiomaActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Classificação indicativa");
-
-        txtClassificacaoIndicativa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClassificacaoIndicativaActionPerformed(evt);
-            }
-        });
 
         jLabel10.setText("Editora");
 
@@ -208,8 +192,7 @@ public class Materiais extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(19, 19, 19))
+                                    .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,31 +201,29 @@ public class Materiais extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOkMaterial)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btnOkMaterial))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtClassificacaoIndicativa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtClassificacaoIndicativa))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtQuantExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel10)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtEditora))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtEditora))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(479, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -318,6 +299,11 @@ public class Materiais extends javax.swing.JFrame {
         });
 
         btnEditarMaterial.setText("Editar");
+        btnEditarMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarMaterialActionPerformed(evt);
+            }
+        });
 
         btnCancelarMaterial.setText("Cancelar");
         btnCancelarMaterial.addActionListener(new java.awt.event.ActionListener() {
@@ -327,6 +313,11 @@ public class Materiais extends javax.swing.JFrame {
         });
 
         btnPesquisarMaterial.setText("Pesquisar");
+        btnPesquisarMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarMaterialActionPerformed(evt);
+            }
+        });
 
         btnExcluirMaterial.setText("Excluir");
         btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
@@ -414,8 +405,8 @@ public class Materiais extends javax.swing.JFrame {
         txtNomeMaterial.setEnabled(true);
         txaDescricaoMaterial.setEnabled(true);
         txtTitulo.setEnabled(true);
-        txtEditora.setEnabled(false);
-        txtTipo.setEnabled(false);
+        txtEditora.setEnabled(true);
+        txtTipo.setEnabled(true);
         txtAutores.setEnabled(true);
         txtAnoPublicacao.setEnabled(true);
         txtClassificacaoIndicativa.setEnabled(true);
@@ -426,38 +417,117 @@ public class Materiais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
 
     private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
-        // TODO add your handling code here:
+       int i = tblMateriais.getSelectedRow();
+        
+        if (i >= 0 && i < listaMateriais.size()) {
+            listaMateriais.remove(i);
+            carregarDadosTabelaMaterial();
+        }
+        // limpar campos
+        txtCodAcervo.setText("");
+        txtNomeMaterial.setText("");
+        txaDescricaoMaterial.setText("");
+        txtTitulo.setText("");
+        txtTipo.setText("");
+        txtAutores.setText("");
+        txtAnoPublicacao.setText("");
+        txtClassificacaoIndicativa.setText("");
+        txtIdioma.setText("");
+        txtEditora.setText("");
+        txtQuantExemplares.setText("");
+
+        // habilitar ou desabilitar botões
+        btnSalvarMaterial.setEnabled(false);
+        btnCancelarMaterial.setEnabled(false);
+        btnEditarMaterial.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
+        btnPesquisarMaterial.setEnabled(true);
+        btnOkMaterial.setEnabled(false);
+
+        // habilitar ou desabilitar texto
+        txtCodAcervo.setEnabled(false);
+        txtNomeMaterial.setEnabled(false);
+        txaDescricaoMaterial.setEnabled(false);
+        txtTitulo.setEnabled(false);
+        txtTipo.setEnabled(false);
+        txtEditora.setEnabled(false);
+        txtAutores.setEnabled(false);
+        txtAnoPublicacao.setEnabled(false);
+        txtClassificacaoIndicativa.setEnabled(false);
+        txtIdioma.setEnabled(false);
+        txtQuantExemplares.setEnabled(false);
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
     private void btnOkMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkMaterialActionPerformed
-        String codigoAcervo = txtCodAcervo.getText();
+        if (txtNomeMaterial.getText().equals("")) {
+           JOptionPane.showMessageDialog(null, "O nome do material deve ser informado", "message", JOptionPane.INFORMATION_MESSAGE);
+       }
+       else {
+           Material mat;
+           String cod = "";
+           String nome = txtNomeMaterial.getText();
+           String descricao = "";
+           String tipo = "";
+           String quantExemp = "";
+           String tituloAlt = "";
+           String idioma = "";
+           String autor = "";
+           String editora = "";
+           String anoPublicacao = "";
+           String classIndicativa = "";
+           
+           for (int i = 0; i < listaMateriais.size(); i++) {
+                mat = listaMateriais.get(i);
+                if (nome.equals(mat.getNome())) {
+                    cod = String.valueOf(mat.getCodigoAcervo());
+                    nome = mat.getNome();
+                    descricao = mat.getDescricao();
+                    tipo = mat.getTipoMaterial();
+                    quantExemp = String.valueOf(mat.getNumExemplares());
+                    tituloAlt = String.valueOf(mat.getMetadataByIndex(0));
+                    idioma = String.valueOf(mat.getMetadataByIndex(1));
+                    autor = String.valueOf(mat.getMetadataByIndex(2));
+                    editora = String.valueOf(mat.getMetadataByIndex(3));
+                    anoPublicacao = String.valueOf(mat.getMetadataByIndex(4));
+                    classIndicativa = String.valueOf(mat.getMetadataByIndex(5));
+                }
+           }
+           
+           if (nome.equals("")) {
+                JOptionPane.showMessageDialog(null, " Essa data não pussui chamados", "message", JOptionPane.PLAIN_MESSAGE);
+           }
+           else {
+               txtCodAcervo.setText(cod);
+                txtNomeMaterial.setText(nome);
+                txaDescricaoMaterial.setText(descricao);
+                txtTitulo.setText(tituloAlt);
+                txtTipo.setText(tipo);
+                txtAutores.setText(autor);
+                txtAnoPublicacao.setText(anoPublicacao);
+                txtClassificacaoIndicativa.setText(classIndicativa);
+                txtIdioma.setText(idioma);
+                txtEditora.setText(editora);
+                txtQuantExemplares.setText(quantExemp);
+           }
+            
+       }
     }//GEN-LAST:event_btnOkMaterialActionPerformed
-
-    private void txtIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdiomaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdiomaActionPerformed
-
-    private void txtClassificacaoIndicativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClassificacaoIndicativaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClassificacaoIndicativaActionPerformed
 
     private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
          if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
                 txaDescricaoMaterial.getText().equals("") || txtTitulo.getText().equals("") || 
                 txtAutores.getText().equals("") || txtTipo.getText().equals("") ||
                 txtAnoPublicacao.getText().equals("") || txtEditora.getText().equals("") ||
-                txtClassificacaoIndicativa.getText().equals("") || 
+                txtClassificacaoIndicativa.getText().equals("") || txtIdioma.getText().equals("") ||
                 txtQuantExemplares.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-            
         }
-        
         else {
              // get de dados
             String acervo = txtCodAcervo.getText();
             String nome = txtNomeMaterial.getText();
             String descricao = txaDescricaoMaterial.getText();
-            String titulo = txtTitulo.getText();
+            String tituloAlternativo = txtTitulo.getText();
             String tipo = txtTipo.getText();
             String autores = txtAutores.getText();
             String anoPublicacao = txtAnoPublicacao.getText();
@@ -466,16 +536,13 @@ public class Materiais extends javax.swing.JFrame {
             String classificacaoEtaria = txtClassificacaoIndicativa.getText();
             int numExemplares = Integer.parseInt(txtQuantExemplares.getText());
             
-            metadata[0] = titulo;
+            metadata[0] = tituloAlternativo;
             metadata[1] = autores;
             metadata[2] = anoPublicacao;
             metadata[3] = idioma;
             metadata[4] = editora;
             metadata[5] = classificacaoEtaria;
-            
-            
-            
-            
+     
             if (botao.equals("novo")) {
                 Material material = new Material(acervo, nome, descricao, tipo, metadata, numExemplares);
             
@@ -550,6 +617,8 @@ public class Materiais extends javax.swing.JFrame {
                 txaDescricaoMaterial.setEnabled(false);
                 txtTitulo.setEnabled(false);
                 txtAutores.setEnabled(false);
+                txtEditora.setEnabled(false);
+                txtTipo.setEnabled(false);
                 txtAnoPublicacao.setEnabled(false);
                 txtClassificacaoIndicativa.setEnabled(false);
                 txtIdioma.setEnabled(false);
@@ -567,9 +636,73 @@ public class Materiais extends javax.swing.JFrame {
                 txtQuantExemplares.setText("");
     }//GEN-LAST:event_btnCancelarMaterialActionPerformed
 
-    private void txtAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAutoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAutoresActionPerformed
+    private void btnEditarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMaterialActionPerformed
+        botao = "editar";
+        // habilitar ou desabilitar botoes
+        btnNovoMaterial.setEnabled(false);
+        btnSalvarMaterial.setEnabled(true);
+        btnCancelarMaterial.setEnabled(true);
+        btnEditarMaterial.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
+        btnPesquisarMaterial.setEnabled(false);
+        btnOkMaterial.setEnabled(false);
+        // habilitar ou desabilitar texto
+        txtCodAcervo.setEnabled(true);
+        txtNomeMaterial.setEnabled(true);
+        txaDescricaoMaterial.setEnabled(true);
+        txtTitulo.setEnabled(true);
+        txtEditora.setEnabled(false);
+        txtTipo.setEnabled(false);
+        txtAutores.setEnabled(true);
+        txtAnoPublicacao.setEnabled(true);
+        txtClassificacaoIndicativa.setEnabled(true);
+        txtIdioma.setEnabled(true);
+        txtQuantExemplares.setEnabled(true);
+
+        txtCodAcervo.requestFocus();
+    }//GEN-LAST:event_btnEditarMaterialActionPerformed
+
+    private void btnPesquisarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMaterialActionPerformed
+        if(listaMateriais.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum material foi cadastrado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+        else {
+            txtCodAcervo.setText("");
+            txtNomeMaterial.setText("");
+            txaDescricaoMaterial.setText("");
+            txtTitulo.setText("");
+            txtAutores.setText("");
+            txtAnoPublicacao.setText("");
+            txtClassificacaoIndicativa.setText("");
+            txtIdioma.setText("");
+            txtEditora.setText("");
+            txtQuantExemplares.setText("");
+
+        // habilitar ou desabilitar botões
+        btnNovoMaterial.setEnabled(false);
+        btnSalvarMaterial.setEnabled(false);
+        btnCancelarMaterial.setEnabled(true);
+        btnEditarMaterial.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
+        btnPesquisarMaterial.setEnabled(true);
+        btnOkMaterial.setEnabled(true);
+
+        // habilitar ou desabilitar texto
+        txtNomeMaterial.setEnabled(false);
+        txaDescricaoMaterial.setEnabled(false);
+        txtTitulo.setEnabled(false);
+        txtEditora.setEnabled(false);
+        txtTipo.setEnabled(false);
+        txtAutores.setEnabled(false);
+        txtAnoPublicacao.setEnabled(false);
+        txtClassificacaoIndicativa.setEnabled(false);
+        txtIdioma.setEnabled(false);
+        txtQuantExemplares.setEnabled(false);
+        
+        txtCodAcervo.requestFocus(); 
+        }
+       
+    }//GEN-LAST:event_btnPesquisarMaterialActionPerformed
 
     /**
      * @param args the command line arguments

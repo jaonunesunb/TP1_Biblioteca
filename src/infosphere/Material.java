@@ -15,6 +15,7 @@ public class Material {
     protected String[] metadata;
     protected String tipoMaterial;
     protected int numExemplares;
+    protected int num;
 
     public Material(String codigoAcervo, String nome, String descricao, String tipoMaterial, String[] metadata, int numExemplares) {
         this.codigoAcervo = codigoAcervo;
@@ -35,6 +36,17 @@ public class Material {
 
     public String getNome() {
         return nome;
+    }
+
+    public String[] getMetadata() {
+        return metadata;
+    }
+    
+     public String getMetadataByIndex(int num) {
+        return metadata[num];
+    }
+    public void setMetadata(String[] metadata) {
+        this.metadata = metadata;
     }
 
     public void setNome(String nome) {
