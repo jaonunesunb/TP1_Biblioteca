@@ -4,10 +4,16 @@
  */
 package infosphere;
 
+import java.util.Date;
+
 /**
  *
  * @author Pegad
  */
-public class Docente {
-    
+class Docente extends Usuario {
+    public Docente(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
+        super(TipoUsuario.DOCENTE, nome, cpf, email, senha, dataDeNascimento);
+        this.numDias = 30;
+        this.numMateriais = 15;
+    }
 }

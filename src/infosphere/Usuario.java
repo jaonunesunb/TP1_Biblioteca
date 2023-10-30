@@ -35,6 +35,70 @@ class Usuario {
         this.suspenso = false;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataDeNascimento() {
+        return dataDeNascimento;
+    }
+
+    public void setDataDeNascimento(Date dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isSuspenso() {
+        return suspenso;
+    }
+
+    public void setSuspenso(boolean suspenso) {
+        this.suspenso = suspenso;
+    }
+
+    public int getNumDias() {
+        return numDias;
+    }
+
+    public void setNumDias(int numDias) {
+        this.numDias = numDias;
+    }
+
+    public int getNumMateriais() {
+        return numMateriais;
+    }
+
+    public void setNumMateriais(int numMateriais) {
+        this.numMateriais = numMateriais;
+    }
+
     public void pegarEmprestado(Material material, String senha) {
         if (!suspenso && senha.equals(this.senha) && podePegarEmprestado(material)) {
             // Lógica para emprestar o material
@@ -76,48 +140,4 @@ class Usuario {
         // Verifica se o usuário pode renovar o material (lógica de validação)
         return !suspenso && numDias > 0;
     }
-}
-
-class Estudante extends Usuario {
-    public Estudante(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
-        super(TipoUsuario.ESTUDANTE, nome, cpf, email, senha, dataDeNascimento);
-        this.numDias = 15;
-        this.numMateriais = 10;
-    }
-}
-
-class Docente extends Usuario {
-    public Docente(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
-        super(TipoUsuario.DOCENTE, nome, cpf, email, senha, dataDeNascimento);
-        this.numDias = 30;
-        this.numMateriais = 15;
-    }
-}
-
-class Funcionario extends Usuario {
-    public Funcionario(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
-        super(TipoUsuario.FUNCIONARIO, nome, cpf, email, senha, dataDeNascimento);
-        this.numDias = 30;
-        this.numMateriais = 15;
-    }
-
-    public void suspender(String senhaAdmin) {
-        if (senhaAdmin.equals("senhaAdmin")) {
-            suspenso = true;
-            System.out.println("Usuário suspenso.");
-        } else {
-            System.out.println("Senha de administração incorreta. Operação não permitida.");
-        }
-    }
-
-    public void removerSuspensao(String senhaAdmin) {
-        if (senhaAdmin.equals("senhaAdmin")) {
-            suspenso = false;
-            System.out.println("Suspensão removida.");
-        } else {
-            System.out.println("Senha de administração incorreta. Operação não permitida.");
-        }
-    }
-    
-
 }
