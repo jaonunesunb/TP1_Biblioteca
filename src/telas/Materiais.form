@@ -173,7 +173,7 @@
                               <Component id="txtQuantExemplares" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="666" max="32767" attributes="0"/>
+                      <EmptySpace pref="678" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -295,10 +295,10 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                    <StringItem index="0" value="Livro"/>
+                    <StringItem index="1" value="Peri&#xf3;dico"/>
+                    <StringItem index="2" value="Audiovisual"/>
+                    <StringItem index="3" value="Sonoro"/>
                   </StringArray>
                 </Property>
               </Properties>
