@@ -152,7 +152,7 @@ public class Materiais extends javax.swing.JFrame {
 
         jLabel11.setText("Quantidade de exemplares");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livro", "Periódico", "Audiovisual", "Sonoro" }));
 
         jButton1.setText("Cadastrar metadados");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +187,7 @@ public class Materiais extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtQuantExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(666, Short.MAX_VALUE))
+                .addContainerGap(678, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()

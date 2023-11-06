@@ -37,6 +37,10 @@ public class Material {
     public String getNome() {
         return nome;
     }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String[] getMetadata() {
         return metadata;
@@ -47,10 +51,6 @@ public class Material {
     }
     public void setMetadata(String[] metadata) {
         this.metadata = metadata;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDescricao() {

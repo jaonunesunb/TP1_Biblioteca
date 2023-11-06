@@ -30,9 +30,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnAcesso = new javax.swing.JMenu();
-        mntCadastro = new javax.swing.JMenuItem();
-        mntLogin = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        mniCadastro = new javax.swing.JMenuItem();
+        mniLogin = new javax.swing.JMenuItem();
         mntSair = new javax.swing.JMenuItem();
         mnMateriais = new javax.swing.JMenu();
         mntAddMateriais = new javax.swing.JMenuItem();
@@ -47,13 +47,23 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setText("Sistema InfoSphere");
 
         mnAcesso.setText("Acesso");
-
-        mntCadastro.setText("Cadastro");
-        mnAcesso.add(mntCadastro);
-
-        mntLogin.setText("Login");
-        mnAcesso.add(mntLogin);
         mnAcesso.add(jSeparator1);
+
+        mniCadastro.setText("Cadastro");
+        mniCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadastroActionPerformed(evt);
+            }
+        });
+        mnAcesso.add(mniCadastro);
+
+        mniLogin.setText("Login");
+        mniLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniLoginActionPerformed(evt);
+            }
+        });
+        mnAcesso.add(mniLogin);
 
         mntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/log_out_icon_197724.png"))); // NOI18N
         mntSair.setText("Sair");
@@ -116,6 +126,14 @@ public class Principal extends javax.swing.JFrame {
         new Materiais().setVisible(true);
     }//GEN-LAST:event_mntAddMateriaisActionPerformed
 
+    private void mniCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroActionPerformed
+        new Cadastro().setVisible(true);
+    }//GEN-LAST:event_mniCadastroActionPerformed
+
+    private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
+        new Login().setVisible(true);
+    }//GEN-LAST:event_mniLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -159,9 +177,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnAcesso;
     private javax.swing.JMenu mnMateriais;
+    private javax.swing.JMenuItem mniCadastro;
+    private javax.swing.JMenuItem mniLogin;
     private javax.swing.JMenuItem mntAddMateriais;
-    private javax.swing.JMenuItem mntCadastro;
-    private javax.swing.JMenuItem mntLogin;
     private javax.swing.JMenuItem mntSair;
     // End of variables declaration//GEN-END:variables
 }
