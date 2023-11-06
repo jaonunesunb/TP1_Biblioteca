@@ -24,7 +24,7 @@ class Usuario {
         ESTUDANTE,
         DOCENTE,
         FUNCIONARIO
-}
+    }
 
     public Usuario(TipoUsuario tipoUsuario, String nome, String cpf, String email, String senha, Date dataDeNascimento) {
         this.nome = nome;
@@ -99,45 +99,46 @@ class Usuario {
         this.numMateriais = numMateriais;
     }
 
-    public void pegarEmprestado(Material material, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podePegarEmprestado(material)) {
-            // Lógica para emprestar o material
-            System.out.println("Material emprestado com sucesso para " + nome);
+    public void pegarEmprestado(Exemplar exemplar, String senha) {
+        if (!suspenso && senha.equals(this.senha) && podePegarEmprestado(exemplar)) {
+            // Lógica para emprestar o exemplar
+            System.out.println("Exemplar emprestado com sucesso para " + nome);
         } else {
-            System.out.println("Não foi possível emprestar o material para " + nome);
+            System.out.println("Não foi possível emprestar o exemplar para " + nome);
         }
     }
 
-    public boolean podePegarEmprestado(Material material) {
-        // Verifica se o usuário pode pegar emprestado o material (lógica de validação)
+    public boolean podePegarEmprestado(Exemplar exemplar) {
+        // Verifica se o usuário pode pegar emprestado o exemplar (lógica de validação)
         return !suspenso && numDias > 0 && numMateriais > 0;
     }
 
-    public void reservar(Material material, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podeReservar(material)) {
-            // Lógica para reservar o material
-            System.out.println("Material reservado com sucesso para " + nome);
+    public void reservar(Exemplar exemplar, String senha) {
+        if (!suspenso && senha.equals(this.senha) && podeReservar(exemplar)) {
+            // Lógica para reservar o exemplar
+            System.out.println("Exemplar reservado com sucesso para " + nome);
         } else {
-            System.out.println("Não foi possível reservar o material para " + nome);
+            System.out.println("Não foi possível reservar o exemplar para " + nome);
         }
     }
 
-    public boolean podeReservar(Material material) {
-        // Verifica se o usuário pode reservar o material (lógica de validação)
+    public boolean podeReservar(Exemplar exemplar) {
+        // Verifica se o usuário pode reservar o exemplar (lógica de validação)
         return !suspenso && numDias > 0 && numMateriais > 0;
     }
 
-    public void renovar(Material material, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podeRenovar(material)) {
-            // Lógica para renovar o material
-            System.out.println("Material renovado com sucesso para " + nome);
+    public void renovar(Exemplar exemplar, String senha) {
+        if (!suspenso && senha.equals(this.senha) && podeRenovar(exemplar)) {
+            // Lógica para renovar o exemplar
+            System.out.println("Exemplar renovado com sucesso para " + nome);
         } else {
-            System.out.println("Não foi possível renovar o material para " + nome);
+            System.out.println("Não foi possível renovar o exemplar para " + nome);
         }
     }
 
-    public boolean podeRenovar(Material material) {
-        // Verifica se o usuário pode renovar o material (lógica de validação)
+    public boolean podeRenovar(Exemplar exemplar) {
+        // Verifica se o usuário pode renovar o exemplar (lógica de validação)
         return !suspenso && numDias > 0;
     }
 }
+
