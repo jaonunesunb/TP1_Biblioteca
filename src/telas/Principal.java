@@ -123,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mntSairActionPerformed
 
     private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
-        new Materiais().setVisible(true);
+        new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_mntAddMateriaisActionPerformed
 
     private void mniCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroActionPerformed

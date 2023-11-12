@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pegad
  */
-public class Materiais extends javax.swing.JFrame {
+public class CadastroMateriais extends javax.swing.JFrame {
     static ArrayList<Material> listaMateriais;
     String[] metadata = new String[6];
     //String[] tiposDeMateriais = {"Livros", "Periódicos", "Lúdicos", "Audiovisuais", "Sonoros"};
@@ -21,7 +21,7 @@ public class Materiais extends javax.swing.JFrame {
     /**
      * Creates new form Materiais
      */
-    public Materiais() {
+    public CadastroMateriais() {
         initComponents();
         listaMateriais = new ArrayList();
         
@@ -691,20 +691,21 @@ public class Materiais extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Materiais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroMateriais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Materiais().setVisible(true);
+                new CadastroMateriais().setVisible(true);
             }
         });
     }
