@@ -11,8 +11,8 @@ import java.util.Date;
  * @author Pegad
  */
 class Funcionario extends Usuario {
-    public Funcionario(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
-        super(TipoUsuario.FUNCIONARIO, nome, cpf, email, senha, dataDeNascimento);
+    public Funcionario(String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
+        super(TipoUsuario.FUNCIONARIO, nome, cpf, email, senha, dataDeNascimento, multaTotal);
         this.numDias = 30;
         this.numMateriais = 15;
     }

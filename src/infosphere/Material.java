@@ -11,17 +11,17 @@ package infosphere;
 public class Material {
     protected String codigoAcervo;
     protected String nome;
+    protected String autor; 
     protected String descricao;
     protected String[] metadata;
-    protected String tipoMaterial;
     protected int numExemplares;
     protected int num;
 
-    public Material(String codigoAcervo, String nome, String descricao, String tipoMaterial, String[] metadata, int numExemplares) {
+    public Material(String codigoAcervo, String nome, String autor, String descricao, String[] metadata, int numExemplares, TipoMateriais tipoMateriais) {
         this.codigoAcervo = codigoAcervo;
         this.nome = nome;
+        this.autor = autor;
         this.descricao = descricao;
-        this.tipoMaterial = tipoMaterial;
         this.metadata = metadata;
         this.numExemplares = numExemplares;
     }

@@ -11,8 +11,8 @@ import java.util.Date;
  * @author Pegad
  */
 class Docente extends Usuario {
-    public Docente(String nome, String cpf, String email, String senha, Date dataDeNascimento) {
-        super(TipoUsuario.DOCENTE, nome, cpf, email, senha, dataDeNascimento);
+    public Docente(String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
+        super(TipoUsuario.DOCENTE, nome, cpf, email, senha, dataDeNascimento, multaTotal);
         this.numDias = 30;
         this.numMateriais = 15;
     }

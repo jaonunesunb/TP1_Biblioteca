@@ -16,22 +16,20 @@ class Usuario {
     protected Date dataDeNascimento;
     protected String email;
     protected String senha;
+    protected Double multaTotal;
     protected boolean suspenso;
     protected int numDias;
     protected int numMateriais;
     
-    enum TipoUsuario {
-        ESTUDANTE,
-        DOCENTE,
-        FUNCIONARIO
-    }
 
-    public Usuario(TipoUsuario tipoUsuario, String nome, String cpf, String email, String senha, Date dataDeNascimento) {
+
+    public Usuario(TipoUsuario tipoUsuario, String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
         this.email = email;
         this.senha = senha;
+        this.multaTotal = 0.0;
         this.suspenso = false;
     }
 
@@ -41,6 +39,14 @@ class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Double getMultaTotal() {
+        return multaTotal;
+    }
+
+    public void setMultaTotal(Double multaTotal) {
+        this.multaTotal = multaTotal;
     }
 
     public String getCpf() {
@@ -98,47 +104,4 @@ class Usuario {
     public void setNumMateriais(int numMateriais) {
         this.numMateriais = numMateriais;
     }
-
-    public void pegarEmprestado(Exemplar exemplar, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podePegarEmprestado(exemplar)) {
-            // Lógica para emprestar o exemplar
-            System.out.println("Exemplar emprestado com sucesso para " + nome);
-        } else {
-            System.out.println("Não foi possível emprestar o exemplar para " + nome);
-        }
-    }
-
-    public boolean podePegarEmprestado(Exemplar exemplar) {
-        // Verifica se o usuário pode pegar emprestado o exemplar (lógica de validação)
-        return !suspenso && numDias > 0 && numMateriais > 0;
-    }
-
-    public void reservar(Exemplar exemplar, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podeReservar(exemplar)) {
-            // Lógica para reservar o exemplar
-            System.out.println("Exemplar reservado com sucesso para " + nome);
-        } else {
-            System.out.println("Não foi possível reservar o exemplar para " + nome);
-        }
-    }
-
-    public boolean podeReservar(Exemplar exemplar) {
-        // Verifica se o usuário pode reservar o exemplar (lógica de validação)
-        return !suspenso && numDias > 0 && numMateriais > 0;
-    }
-
-    public void renovar(Exemplar exemplar, String senha) {
-        if (!suspenso && senha.equals(this.senha) && podeRenovar(exemplar)) {
-            // Lógica para renovar o exemplar
-            System.out.println("Exemplar renovado com sucesso para " + nome);
-        } else {
-            System.out.println("Não foi possível renovar o exemplar para " + nome);
-        }
-    }
-
-    public boolean podeRenovar(Exemplar exemplar) {
-        // Verifica se o usuário pode renovar o exemplar (lógica de validação)
-        return !suspenso && numDias > 0;
-    }
 }
-

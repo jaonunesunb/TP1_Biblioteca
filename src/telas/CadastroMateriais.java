@@ -72,8 +72,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblMateriais = new javax.swing.JTable();
         btnFecharMaterial = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
@@ -81,48 +79,36 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtCodAcervo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtNomeMaterial = new javax.swing.JTextField();
-        btnOkMaterial = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txaDescricaoMaterial = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txtQuantExemplares = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        btnNovoMaterial = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
         btnSalvarMaterial = new javax.swing.JButton();
         btnEditarMaterial = new javax.swing.JButton();
         btnCancelarMaterial = new javax.swing.JButton();
-        btnPesquisarMaterial = new javax.swing.JButton();
         btnExcluirMaterial = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Materiais");
         setAlwaysOnTop(true);
-
-        tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Acervo", "Nome", "Tipo", "Número de exemplares"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblMateriais);
 
         btnFecharMaterial.setText("Sair");
         btnFecharMaterial.addActionListener(new java.awt.event.ActionListener() {
@@ -135,13 +121,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel3.setText("Nome");
 
-        btnOkMaterial.setText("Pesquisar");
-        btnOkMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkMaterialActionPerformed(evt);
-            }
-        });
-
         txaDescricaoMaterial.setColumns(20);
         txaDescricaoMaterial.setRows(5);
         jScrollPane2.setViewportView(txaDescricaoMaterial);
@@ -150,18 +129,25 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel5.setText("Tipo do material");
 
-        jLabel11.setText("Quantidade de exemplares");
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livro", "Periódico", "Audiovisual", "Sonoro" }));
 
-        jButton1.setText("Cadastrar metadados");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("Pesquisar");
+
+        jLabel1.setText("Autores");
+
+        jLabel6.setText("Editora");
+
+        jLabel7.setText("CDU");
+
+        jLabel8.setText("Núm. páginas");
+
+        jLabel9.setText("Dimensões");
+
+        jLabel10.setText("Edição");
+
+        jButton4.setText("Add autor");
+
+        jLabel12.setText("Assuntos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,34 +164,56 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnOkMaterial)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuantExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(678, Short.MAX_VALUE))
+                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(61, 61, 61)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtNomeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel12)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addComponent(jButton1)))
-                .addGap(0, 686, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtNomeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButton3))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(170, 170, 170)
+                                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel8))
+                        .addGap(0, 678, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,9 +221,8 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnOkMaterial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNomeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,22 +234,36 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel11)
-                    .addComponent(txtQuantExemplares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jButton1)
-                .addContainerGap(143, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel1);
-
-        btnNovoMaterial.setText("Novo");
-        btnNovoMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoMaterialActionPerformed(evt);
-            }
-        });
 
         btnSalvarMaterial.setText("Salvar");
         btnSalvarMaterial.addActionListener(new java.awt.event.ActionListener() {
@@ -265,13 +286,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
             }
         });
 
-        btnPesquisarMaterial.setText("Pesquisar");
-        btnPesquisarMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarMaterialActionPerformed(evt);
-            }
-        });
-
         btnExcluirMaterial.setText("Excluir");
         btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,99 +299,42 @@ public class CadastroMateriais extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addComponent(btnNovoMaterial)
-                .addGap(41, 41, 41)
+                .addGap(26, 26, 26)
                 .addComponent(btnSalvarMaterial)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditarMaterial)
-                .addGap(29, 29, 29)
+                .addGap(74, 74, 74)
                 .addComponent(btnCancelarMaterial)
-                .addGap(44, 44, 44)
-                .addComponent(btnPesquisarMaterial)
-                .addGap(55, 55, 55)
+                .addGap(42, 42, 42)
                 .addComponent(btnExcluirMaterial)
-                .addGap(62, 62, 62))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(216, 216, 216)
+                .addGap(29, 29, 29)
                 .addComponent(jButton2)
-                .addGap(192, 192, 192)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(btnFecharMaterial)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovoMaterial)
                     .addComponent(btnSalvarMaterial)
                     .addComponent(btnEditarMaterial)
                     .addComponent(btnCancelarMaterial)
-                    .addComponent(btnPesquisarMaterial)
-                    .addComponent(btnExcluirMaterial))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jButton2)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFecharMaterial))))
+                    .addComponent(btnExcluirMaterial)
+                    .addComponent(jButton2)
+                    .addComponent(btnFecharMaterial))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
-        /*botao = "novo";
-        // limpar campos
-        txtCodAcervo.setText("");
-        txtNomeMaterial.setText("");
-        txaDescricaoMaterial.setText("");
-        txtTitulo.setText("");
-        txtTipo.setText("");
-        txtAutores.setText("");
-        txtAnoPublicacao.setText("");
-        txtClassificacaoIndicativa.setText("");
-        txtIdioma.setText("");
-        txtEditora.setText("");
-        txtQuantExemplares.setText("");
-     
-        // habilitar ou desabilitar botões
-        btnNovoMaterial.setEnabled(false);
-        btnSalvarMaterial.setEnabled(true);
-        btnCancelarMaterial.setEnabled(true);
-        btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(false);
-        btnOkMaterial.setEnabled(false);
-
-        // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(true);
-        txtNomeMaterial.setEnabled(true);
-        txaDescricaoMaterial.setEnabled(true);
-        txtTitulo.setEnabled(true);
-        txtEditora.setEnabled(true);
-        txtTipo.setEnabled(true);
-        txtAutores.setEnabled(true);
-        txtAnoPublicacao.setEnabled(true);
-        txtClassificacaoIndicativa.setEnabled(true);
-        txtIdioma.setEnabled(true);
-        txtQuantExemplares.setEnabled(true);
-
-        txtCodAcervo.requestFocus();
-        */
-    }//GEN-LAST:event_btnNovoMaterialActionPerformed
 
     private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
       /* int i = tblMateriais.getSelectedRow();
@@ -421,61 +378,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtQuantExemplares.setEnabled(false);
         */
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
-
-    private void btnOkMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkMaterialActionPerformed
-        /*if (txtNomeMaterial.getText().equals("")) {
-           JOptionPane.showMessageDialog(null, "O nome do material deve ser informado", "message", JOptionPane.INFORMATION_MESSAGE);
-       }
-       else {
-           Material mat;
-           String cod = "";
-           String nome = txtNomeMaterial.getText();
-           String descricao = "";
-           String tipo = "";
-           String quantExemp = "";
-           String tituloAlt = "";
-           String idioma = "";
-           String autor = "";
-           String editora = "";
-           String anoPublicacao = "";
-           String classIndicativa = "";
-           
-           for (int i = 0; i < listaMateriais.size(); i++) {
-                mat = listaMateriais.get(i);
-                if (nome.equals(mat.getNome())) {
-                    cod = String.valueOf(mat.getCodigoAcervo());
-                    nome = mat.getNome();
-                    descricao = mat.getDescricao();
-                    tipo = mat.getTipoMaterial();
-                    quantExemp = String.valueOf(mat.getNumExemplares());
-                    tituloAlt = String.valueOf(mat.getMetadataByIndex(0));
-                    idioma = String.valueOf(mat.getMetadataByIndex(1));
-                    autor = String.valueOf(mat.getMetadataByIndex(2));
-                    editora = String.valueOf(mat.getMetadataByIndex(3));
-                    anoPublicacao = String.valueOf(mat.getMetadataByIndex(4));
-                    classIndicativa = String.valueOf(mat.getMetadataByIndex(5));
-                }
-           }
-           
-           if (nome.equals("")) {
-                JOptionPane.showMessageDialog(null, " Essa data não pussui chamados", "message", JOptionPane.PLAIN_MESSAGE);
-           }
-           else {
-               txtCodAcervo.setText(cod);
-                txtNomeMaterial.setText(nome);
-                txaDescricaoMaterial.setText(descricao);
-                txtTitulo.setText(tituloAlt);
-                //txtTipo.setText(tipo);
-                txtAutores.setText(autor);
-                txtAnoPublicacao.setText(anoPublicacao);
-                txtClassificacaoIndicativa.setText(classIndicativa);
-                txtIdioma.setText(idioma);
-                txtEditora.setText(editora);
-                txtQuantExemplares.setText(quantExemp);
-           }
-            
-       }*/
-    }//GEN-LAST:event_btnOkMaterialActionPerformed
 
     private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
          /*if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
@@ -628,52 +530,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_btnEditarMaterialActionPerformed
 
-    private void btnPesquisarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMaterialActionPerformed
-       /* if(listaMateriais.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum material foi cadastrado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
-        }
-        else {
-            txtCodAcervo.setText("");
-            txtNomeMaterial.setText("");
-            txaDescricaoMaterial.setText("");
-            txtTitulo.setText("");
-            txtAutores.setText("");
-            txtAnoPublicacao.setText("");
-            txtClassificacaoIndicativa.setText("");
-            txtIdioma.setText("");
-            txtEditora.setText("");
-            txtQuantExemplares.setText("");
-
-        // habilitar ou desabilitar botões
-        btnNovoMaterial.setEnabled(false);
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(true);
-        btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(true);
-        btnOkMaterial.setEnabled(true);
-
-        // habilitar ou desabilitar texto
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        txtEditora.setEnabled(false);
-        //txtTipo.setEnabled(false);
-        txtAutores.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtClassificacaoIndicativa.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtQuantExemplares.setEnabled(false);
-        
-        txtCodAcervo.requestFocus(); 
-        }
-       */
-    }//GEN-LAST:event_btnPesquisarMaterialActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -715,27 +571,34 @@ public class CadastroMateriais extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarMaterial;
     private javax.swing.JButton btnExcluirMaterial;
     private javax.swing.JButton btnFecharMaterial;
-    private javax.swing.JButton btnNovoMaterial;
-    private javax.swing.JButton btnOkMaterial;
-    private javax.swing.JButton btnPesquisarMaterial;
     private javax.swing.JButton btnSalvarMaterial;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblMateriais;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextArea txaDescricaoMaterial;
     private javax.swing.JTextField txtCodAcervo;
     private javax.swing.JTextField txtNomeMaterial;
-    private javax.swing.JTextField txtQuantExemplares;
     // End of variables declaration//GEN-END:variables
 }

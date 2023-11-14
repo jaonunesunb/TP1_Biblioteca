@@ -4,6 +4,8 @@
  */
 package infosphere;
 
+import java.util.Date;
+
 /**
  *
  * @author Pegad
@@ -13,13 +15,17 @@ public class Exemplar extends Material {
     protected int renovacoes;
     protected boolean emprestado;
     protected boolean reservado;
+    protected Date dataDevolucao;
+    protected Double valorMulta;
 
-    public Exemplar(String codigo, String nome, String descricao, String tipoMaterial, String[] metadata, int numExemplares) {
-        super(codigo, nome, descricao, tipoMaterial, metadata, numExemplares);
+    public Exemplar(String codigo, String nome, String autor, Date dataDevolucao, Double valorMulta, String descricao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+        super(codigo, nome, autor, descricao, metadata, numExemplares, tipoMateriais);
         this.codigoExemplar = codigo;
         this.renovacoes = 0;
+        this.valorMulta = 0.0;
         this.emprestado = false;
         this.reservado = false;
+        this.dataDevolucao = dataDevolucao;
     }
 
     public String getCodigoExemplar() {
