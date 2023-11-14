@@ -61,12 +61,20 @@ public class Material {
         this.descricao = descricao;
     }
 
-    public String getTipoMaterial() {
-        return tipoMaterial;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setTipoMaterial(String tipoMaterial) {
-        this.tipoMaterial = tipoMaterial;
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public int getNumExemplares() {

@@ -48,6 +48,22 @@ public class Exemplar extends Material {
         return emprestado;
     }
 
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public Double getValorMulta() {
+        return valorMulta;
+    }
+
+    public void setValorMulta(Double valorMulta) {
+        this.valorMulta = valorMulta;
+    }
+
     public void setEmprestado(boolean emprestado) {
         this.emprestado = emprestado;
     }
