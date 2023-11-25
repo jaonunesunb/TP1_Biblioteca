@@ -25,28 +25,29 @@ public class CadastroMateriais extends javax.swing.JFrame {
         initComponents();
         listaMateriais = new ArrayList();
         
-        // habilitar ou desabilitar botões
-       /* btnNovoMaterial.setEnabled(true);
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(false);
-        btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(true);
-        btnOkMaterial.setEnabled(false);
+        //habilitar ou desabilitar botões
+        btnSave.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnExemplares.setEnabled(false);
+        btnSearch.setEnabled(true);
 
         // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(false);
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtTitulo.setEnabled(false);
+        txtCodAcervo.setEnabled(true);
+        txtTitle.setEnabled(true);
+        txtDescription.setEnabled(true);
+        txtEdition.setEnabled(true);
         //txtTipo.setEnabled(false);
-        txtEditora.setEnabled(false);
-        txtAutores.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtClassificacaoIndicativa.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtQuantExemplares.setEnabled(false);
-        */
+        txtPublisher.setEnabled(true);
+        txtAutor.setEnabled(true);
+        txtAnoPublicacao.setEnabled(true);
+        txtCDU.setEnabled(true);
+        txtIdioma.setEnabled(true);
+        txtNumPaginas.setEnabled(true);
+        txtDimensions.setEnabled(true);
+        txtAssuntos.setEnabled(true);
+        
     }
     
     public void carregarDadosTabelaMaterial() {
@@ -72,48 +73,53 @@ public class CadastroMateriais extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnFecharMaterial = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCodAcervo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNomeMaterial = new javax.swing.JTextField();
+        txtTitle = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txaDescricaoMaterial = new javax.swing.JTextArea();
+        txtDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAutor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPublisher = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtCDU = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNumPaginas = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtDimensions = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtEdition = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        btnSalvarMaterial = new javax.swing.JButton();
-        btnEditarMaterial = new javax.swing.JButton();
-        btnCancelarMaterial = new javax.swing.JButton();
-        btnExcluirMaterial = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txtAssuntos = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtAnoPublicacao = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtIdioma = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnExemplares = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Materiais");
         setAlwaysOnTop(true);
 
-        btnFecharMaterial.setText("Sair");
-        btnFecharMaterial.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharMaterialActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -121,9 +127,9 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel3.setText("Nome");
 
-        txaDescricaoMaterial.setColumns(20);
-        txaDescricaoMaterial.setRows(5);
-        jScrollPane2.setViewportView(txaDescricaoMaterial);
+        txtDescription.setColumns(20);
+        txtDescription.setRows(5);
+        jScrollPane2.setViewportView(txtDescription);
 
         jLabel4.setText("Descrição");
 
@@ -149,6 +155,10 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel12.setText("Assuntos");
 
+        jLabel11.setText("Ano de publicação");
+
+        jLabel13.setText("Idioma");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,20 +179,29 @@ public class CadastroMateriais extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtDimensions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtAssuntos, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCDU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(txtPublisher, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAutor, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel13))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(812, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,12 +222,12 @@ public class CadastroMateriais extends javax.swing.JFrame {
                                         .addGap(61, 61, 61)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtNomeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jButton3))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(170, 170, 170)
-                                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -225,7 +244,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtNomeMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,64 +255,70 @@ public class CadastroMateriais extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCDU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDimensions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAssuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jPanel1);
 
-        btnSalvarMaterial.setText("Salvar");
-        btnSalvarMaterial.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Salvar");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarMaterialActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        btnEditarMaterial.setText("Editar");
-        btnEditarMaterial.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setText("Editar");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarMaterialActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        btnCancelarMaterial.setText("Cancelar");
-        btnCancelarMaterial.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarMaterialActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
-        btnExcluirMaterial.setText("Excluir");
-        btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Excluir");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirMaterialActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Exemplares");
+        btnExemplares.setText("Exemplares");
+
+        btnSearch.setText("Pesquisar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,20 +326,22 @@ public class CadastroMateriais extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane3))
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(btnSalvarMaterial)
+                .addComponent(btnSave)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarMaterial)
-                .addGap(74, 74, 74)
-                .addComponent(btnCancelarMaterial)
-                .addGap(42, 42, 42)
-                .addComponent(btnExcluirMaterial)
-                .addGap(29, 29, 29)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(btnFecharMaterial)
+                .addComponent(btnEdit)
+                .addGap(27, 27, 27)
+                .addComponent(btnCancel)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnExemplares)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(btnSair)
                 .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
@@ -323,12 +350,13 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalvarMaterial)
-                    .addComponent(btnEditarMaterial)
-                    .addComponent(btnCancelarMaterial)
-                    .addComponent(btnExcluirMaterial)
-                    .addComponent(jButton2)
-                    .addComponent(btnFecharMaterial))
+                    .addComponent(btnSave)
+                    .addComponent(btnEdit)
+                    .addComponent(btnCancel)
+                    .addComponent(btnDelete)
+                    .addComponent(btnExemplares)
+                    .addComponent(btnSair)
+                    .addComponent(btnSearch))
                 .addContainerGap())
         );
 
@@ -336,7 +364,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
       /* int i = tblMateriais.getSelectedRow();
         
         if (i >= 0 && i < listaMateriais.size()) {
@@ -377,9 +405,9 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtIdioma.setEnabled(false);
         txtQuantExemplares.setEnabled(false);
         */
-    }//GEN-LAST:event_btnExcluirMaterialActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          /*if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
                 txaDescricaoMaterial.getText().equals("") || txtTitulo.getText().equals("") || 
                 txtAutores.getText().equals("") || 
@@ -461,13 +489,13 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 txtEditora.setText("");
                 txtQuantExemplares.setText("");
         }*/
-    }//GEN-LAST:event_btnSalvarMaterialActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void btnFecharMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharMaterialActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
          this.setVisible(false);
-    }//GEN-LAST:event_btnFecharMaterialActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
-    private void btnCancelarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarMaterialActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
              // habilitar ou desabilitar botões
                 /*btnNovoMaterial.setEnabled(true);
                 btnSalvarMaterial.setEnabled(false);
@@ -501,9 +529,9 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 txtEditora.setText("");
                 txtQuantExemplares.setText("");
                 */
-    }//GEN-LAST:event_btnCancelarMaterialActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnEditarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMaterialActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
        /* botao = "editar";
         // habilitar ou desabilitar botoes
         btnNovoMaterial.setEnabled(false);
@@ -528,7 +556,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         txtCodAcervo.requestFocus();
         */
-    }//GEN-LAST:event_btnEditarMaterialActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -567,18 +595,21 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelarMaterial;
-    private javax.swing.JButton btnEditarMaterial;
-    private javax.swing.JButton btnExcluirMaterial;
-    private javax.swing.JButton btnFecharMaterial;
-    private javax.swing.JButton btnSalvarMaterial;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnExemplares;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,15 +621,17 @@ public class CadastroMateriais extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextArea txaDescricaoMaterial;
+    private javax.swing.JTextField txtAnoPublicacao;
+    private javax.swing.JTextField txtAssuntos;
+    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtCDU;
     private javax.swing.JTextField txtCodAcervo;
-    private javax.swing.JTextField txtNomeMaterial;
+    private javax.swing.JTextArea txtDescription;
+    private javax.swing.JTextField txtDimensions;
+    private javax.swing.JTextField txtEdition;
+    private javax.swing.JTextField txtIdioma;
+    private javax.swing.JTextField txtNumPaginas;
+    private javax.swing.JTextField txtPublisher;
+    private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 }
