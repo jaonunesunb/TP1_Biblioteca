@@ -29,45 +29,31 @@ public class CadastroMateriais extends javax.swing.JFrame {
         initComponents();
         
         btnNovoMaterial.setEnabled(true);
-        //habilitar ou desabilitar botões
-        if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
-                txaDescricaoMaterial.getText().equals("") || txtEdition.getText().equals("") || 
-                txtEditora.getText().equals("") || 
-                 txtAutor.getText().equals("")|| 
-                 txtAnoPublicacao.getText().equals("") || 
-                 txtCDU.getText().equals("") || 
-                 txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
-                || txtDimensions.getText().equals("") 
-                || txtAssuntos.getText().equals("")) {
-            btnSalvarMaterial.setEnabled(false);
-            
-        }
-        else {
-             btnSalvarMaterial.setEnabled(true);
-        }
         btnEditarMaterial.setEnabled(false);
         btnCancelarMaterial.setEnabled(false);
+        btnSalvarMaterial.setEnabled(false);
+        jButton2.setEnabled(false);
         //btnExemplares.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
         
-
         // habilitar ou desabilitar botões
        btnNovoMaterial.setEnabled(true);
 
         // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(true);
-        txtNomeMaterial.setEnabled(true);
-        txaDescricaoMaterial.setEnabled(true);
-        txtEdition.setEnabled(true);
-        txtNumPaginas.setEnabled(true);
-        txtEditora.setEnabled(true);
-        txtAutor.setEnabled(true);
-        txtAnoPublicacao.setEnabled(true);
-        txtDimensions.setEnabled(true);
-        txtCDU.setEnabled(true);
-        txtIdioma.setEnabled(true);
-        txtAssuntos.setEnabled(true);
+        txtCodAcervo.setEnabled(false);
+        txtNomeMaterial.setEnabled(false);
+        txaDescricaoMaterial.setEnabled(false);
+        txtEdition.setEnabled(false);
+        txtNumPaginas.setEnabled(false);
+        txtEditora.setEnabled(false);
+        txtAutor.setEnabled(false);
+        txtAnoPublicacao.setEnabled(false);
+        txtDimensions.setEnabled(false);
+        txtCDU.setEnabled(false);
+        txtIdioma.setEnabled(false);
+        txtAssuntos.setEnabled(false);
         
-        cmbTipoMaterial.setEnabled(true);
+        cmbTipoMaterial.setEnabled(false);
         
     }
         private void clearText() {
@@ -529,26 +515,26 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarMaterialActionPerformed
 
     private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
-        btnNovoMaterial.setEnabled(true);
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(false);
+        btnNovoMaterial.setEnabled(false);
+        btnSalvarMaterial.setEnabled(true);
+        btnCancelarMaterial.setEnabled(true);
         btnEditarMaterial.setEnabled(false);
         btnExcluirMaterial.setEnabled(false);
         
-        txtCodAcervo.setEnabled(false);
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtEdition.setEnabled(false);
-        txtNumPaginas.setEnabled(false);
-        txtEditora.setEnabled(false);
-        txtAutor.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtDimensions.setEnabled(false);
-        txtCDU.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtAssuntos.setEnabled(false);
+        txtCodAcervo.setEnabled(true);
+        txtNomeMaterial.setEnabled(true);
+        txaDescricaoMaterial.setEnabled(true);
+        txtEdition.setEnabled(true);
+        txtNumPaginas.setEnabled(true);
+        txtEditora.setEnabled(true);
+        txtAutor.setEnabled(true);
+        txtAnoPublicacao.setEnabled(true);
+        txtDimensions.setEnabled(true);
+        txtCDU.setEnabled(true);
+        txtIdioma.setEnabled(true);
+        txtAssuntos.setEnabled(true);
         
-        cmbTipoMaterial.setEnabled(false);
+        cmbTipoMaterial.setEnabled(true);
         txtCodAcervo.requestFocus();
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
 
