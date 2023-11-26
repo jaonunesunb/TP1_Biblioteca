@@ -26,10 +26,23 @@ public class CadastroMateriais extends javax.swing.JFrame {
         listaMateriais = new ArrayList();
         
         //habilitar ou desabilitar botões
-        btnSave.setEnabled(false);
+        if (txtCodAcervo.getText().equals("" ) || txtTitle.getText().equals("") || 
+                txtDescription.getText().equals("") || txtEdition.getText().equals("") || 
+                txtPublisher.getText().equals("") || 
+                 txtAutor.getText().equals("")|| 
+                 txtAnoPublicacao.getText().equals("") || 
+                 txtCDU.getText().equals("") || 
+                 txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
+                || txtDimensions.getText().equals("") 
+                || txtAssuntos.getText().equals("")) {
+            btnSave.setEnabled(false);
+            
+        }
+        else {
+             btnSave.setEnabled(true);
+        }
         btnEdit.setEnabled(false);
         btnCancel.setEnabled(false);
-        btnDelete.setEnabled(false);
         btnExemplares.setEnabled(false);
         btnSearch.setEnabled(true);
 
@@ -48,20 +61,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtDimensions.setEnabled(true);
         txtAssuntos.setEnabled(true);
         
-    }
-    
-    public void carregarDadosTabelaMaterial() {
-       /* DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Acervo", 
-            "Nome", "Tipo", "Número de exemplares"}, 0);
-        
-        for (int i = 0; i < listaMateriais.size(); i++) {
-            Object linha[] = new Object[] {listaMateriais.get(i).getCodigoAcervo(),
-                                           listaMateriais.get(i).getNome(),
-                                           listaMateriais.get(i).getTipoMaterial(),
-                                           listaMateriais.get(i).getNumExemplares()};
-            modelo.addRow(linha);
-                    }
-        tblMateriais.setModel(modelo);*/
     }
 
     /**
@@ -108,7 +107,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnExemplares = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
 
@@ -309,13 +307,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setText("Excluir");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
         btnExemplares.setText("Exemplares");
 
         btnSearch.setText("Pesquisar");
@@ -334,9 +325,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addComponent(btnEdit)
                 .addGap(27, 27, 27)
                 .addComponent(btnCancel)
-                .addGap(18, 18, 18)
-                .addComponent(btnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(102, 102, 102)
                 .addComponent(btnExemplares)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
@@ -353,7 +342,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
                     .addComponent(btnSave)
                     .addComponent(btnEdit)
                     .addComponent(btnCancel)
-                    .addComponent(btnDelete)
                     .addComponent(btnExemplares)
                     .addComponent(btnSair)
                     .addComponent(btnSearch))
@@ -363,49 +351,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-      /* int i = tblMateriais.getSelectedRow();
-        
-        if (i >= 0 && i < listaMateriais.size()) {
-            listaMateriais.remove(i);
-            carregarDadosTabelaMaterial();
-        }
-        // limpar campos
-        txtCodAcervo.setText("");
-        txtNomeMaterial.setText("");
-        txaDescricaoMaterial.setText("");
-        txtTitulo.setText("");
-        //txtTipo.setText("");
-        txtAutores.setText("");
-        txtAnoPublicacao.setText("");
-        txtClassificacaoIndicativa.setText("");
-        txtIdioma.setText("");
-        txtEditora.setText("");
-        txtQuantExemplares.setText("");
-
-        // habilitar ou desabilitar botões
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(false);
-        btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(true);
-        btnOkMaterial.setEnabled(false);
-
-        // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(false);
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        //txtTipo.setEnabled(false);
-        txtEditora.setEnabled(false);
-        txtAutores.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtClassificacaoIndicativa.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtQuantExemplares.setEnabled(false);
-        */
-    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          /*if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
@@ -596,7 +541,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnExemplares;
     private javax.swing.JButton btnSair;
