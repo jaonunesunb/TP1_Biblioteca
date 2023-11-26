@@ -29,10 +29,29 @@ public class CadastroMateriais extends javax.swing.JFrame {
         initComponents();
         
         btnNovoMaterial.setEnabled(true);
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(false);
+        //habilitar ou desabilitar botões
+        if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
+                txaDescricaoMaterial.getText().equals("") || txtEdition.getText().equals("") || 
+                txtEditora.getText().equals("") || 
+                 txtAutor.getText().equals("")|| 
+                 txtAnoPublicacao.getText().equals("") || 
+                 txtCDU.getText().equals("") || 
+                 txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
+                || txtDimensions.getText().equals("") 
+                || txtAssuntos.getText().equals("")) {
+            btnSalvarMaterial.setEnabled(false);
+            
+        }
+        else {
+             btnSalvarMaterial.setEnabled(true);
+        }
         btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
+        btnCancelarMaterial.setEnabled(false);
+        //btnExemplares.setEnabled(false);
+        
+
+        // habilitar ou desabilitar botões
+       btnNovoMaterial.setEnabled(true);
 
         // habilitar ou desabilitar texto
         txtCodAcervo.setEnabled(true);
@@ -400,13 +419,12 @@ public class CadastroMateriais extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(btnFecharMaterial)
                     .addComponent(btnNovoMaterial))
-                .addContainerGap())
-        );
+                    .addComponent(btnFecharMaterial)));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+                                    
     private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
       /*int i = tblMateriais.getSelectedRow();
         
@@ -432,7 +450,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
     private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
-         if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
+        if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
                 txaDescricaoMaterial.getText().equals("") || txtEdition.getText().equals("") || 
                 txtEditora.getText().equals("") || 
                  txtAutor.getText().equals("")|| 
@@ -441,6 +459,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
                  txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
                 || txtDimensions.getText().equals("") 
                 || txtAssuntos.getText().equals("")) {
+
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }
         else {

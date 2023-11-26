@@ -26,8 +26,7 @@ public class Materiais extends javax.swing.JPanel {
     public Materiais() {
         initComponents();
         loadMateriais();
-        carregarDadosTabelaMaterial();
-        
+        carregarDadosTabelaMaterial(); 
     }
 
     /**
@@ -69,7 +68,7 @@ public class Materiais extends javax.swing.JPanel {
         btnNovoExemplar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnExcluirMaterial = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnExcluirMaterial1 = new javax.swing.JButton();
 
         btnSearchByTitulo.setText("ok");
         btnSearchByTitulo.addActionListener(new java.awt.event.ActionListener() {
@@ -270,13 +269,13 @@ public class Materiais extends javax.swing.JPanel {
         jButton5.setText("Editar exemplar");
 
         btnExcluirMaterial.setText("Excluir material");
-        btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
+
+        btnExcluirMaterial1.setText("Excluir exemplar");
+        btnExcluirMaterial1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirMaterialActionPerformed(evt);
             }
         });
-
-        jButton8.setText("Excluir exemplar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -297,10 +296,8 @@ public class Materiais extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnNovoExemplar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5)
-                                .addGap(137, 137, 137)
-                                .addComponent(jButton8)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton5)))
+                        .addGap(0, 36, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -318,8 +315,7 @@ public class Materiais extends javax.swing.JPanel {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNovoExemplar)
-                            .addComponent(jButton5)
-                            .addComponent(jButton8))
+                            .addComponent(jButton5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -391,22 +387,22 @@ public class Materiais extends javax.swing.JPanel {
     private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
         new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
-
+                                      
     private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessarMaterial;
     private javax.swing.JButton btnExcluirMaterial;
+    private javax.swing.JButton btnExcluirMaterial1;
     private javax.swing.JButton btnNovoExemplar;
     private javax.swing.JButton btnNovoMaterial;
     private javax.swing.JButton btnSearchByCodAcervo;
     private javax.swing.JButton btnSearchByTitulo;
     private javax.swing.JComboBox<String> cmbTipoMaterial;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

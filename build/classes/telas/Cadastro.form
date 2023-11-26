@@ -170,9 +170,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfEmail">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfEmailActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSenha">
           <Properties>
@@ -180,9 +177,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfSenha">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfSenhaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblFuncao">
           <Properties>

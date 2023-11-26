@@ -205,19 +205,7 @@ public class Cadastro extends javax.swing.JFrame {
 
         lblEmail.setText("Email:");
 
-        txfEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfEmailActionPerformed(evt);
-            }
-        });
-
         lblSenha.setText("Senha:");
-
-        txfSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfSenhaActionPerformed(evt);
-            }
-        });
 
         lblFuncao.setText("Função:");
 
@@ -400,14 +388,6 @@ public class Cadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfEmailActionPerformed
-
-    private void txfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfSenhaActionPerformed
-
     private void btnNovoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoUsuarioActionPerformed
         // TODO add your handling code here:
         
@@ -461,8 +441,6 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCancelarActionPerformed
 
     private void bntSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarUsuarioActionPerformed
-        // TODO add your handling code here:
-        
         if (this.txfCpf.getText().equals("")
                 || this.txfEmail.getText().equals("")
                 || this.txfData.getText().equals("")
