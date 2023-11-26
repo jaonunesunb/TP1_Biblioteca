@@ -8,22 +8,25 @@ package infosphere;
  *
  * @author Pegad
  */
-import java.util.Date;
+import java.time.LocalDate;
+import java.io.Serializable;
 
-class Usuario {
+public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = -299482035708790407L;
+    
     protected String nome;
     protected String cpf;
-    protected Date dataDeNascimento;
+    protected LocalDate dataDeNascimento;
     protected String email;
     protected String senha;
     protected Double multaTotal;
     protected boolean suspenso;
     protected int numDias;
     protected int numMateriais;
-    
+     
+    private LocalDate dataSuspencao;
 
-
-    public Usuario(TipoUsuario tipoUsuario, String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
+    public Usuario(String nome, String cpf, String email, String senha, LocalDate dataDeNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
@@ -31,6 +34,23 @@ class Usuario {
         this.senha = senha;
         this.multaTotal = 0.0;
         this.suspenso = false;
+    }
+    
+    public abstract String parseTipoUsuario();
+    
+    public void suspender(String senhaAdmin) {
+        if (this.suspenso == true) return;
+     
+        this.suspenso = true;
+        this.dataSuspencao = LocalDate.now();
+    }
+
+    public void pagarMulta(String senhaAdmin) {
+        if (this.suspenso == false) return;
+        
+        this.multaTotal = 0.0;
+        this.suspenso = false;
+        this.dataSuspencao = null;
     }
 
     public String getNome() {
@@ -57,11 +77,11 @@ class Usuario {
         this.cpf = cpf;
     }
 
-    public Date getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
