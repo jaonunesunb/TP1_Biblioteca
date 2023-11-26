@@ -441,8 +441,6 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_bntCancelarActionPerformed
 
     private void bntSalvarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSalvarUsuarioActionPerformed
-        // TODO add your handling code here:
-        
         if (this.txfCpf.getText().equals("")
                 || this.txfEmail.getText().equals("")
                 || this.txfData.getText().equals("")
