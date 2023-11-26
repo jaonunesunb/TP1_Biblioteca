@@ -35,8 +35,8 @@ public class Principal extends javax.swing.JFrame {
         mniLogin = new javax.swing.JMenuItem();
         mntSair = new javax.swing.JMenuItem();
         mnMateriais = new javax.swing.JMenu();
+        mniConsultarMateriais = new javax.swing.JMenuItem();
         mntAddMateriais = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/3d_library_folder_20529 (1).png")).getImage());
@@ -78,6 +78,14 @@ public class Principal extends javax.swing.JFrame {
 
         mnMateriais.setText("Materiais");
 
+        mniConsultarMateriais.setText("Consultar materiais");
+        mniConsultarMateriais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniConsultarMateriaisActionPerformed(evt);
+            }
+        });
+        mnMateriais.add(mniConsultarMateriais);
+
         mntAddMateriais.setText("Adicionar materiais");
         mntAddMateriais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,9 +93,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnMateriais.add(mntAddMateriais);
-
-        jMenuItem5.setText("Relatório de transações");
-        mnMateriais.add(jMenuItem5);
 
         jMenuBar1.add(mnMateriais);
 
@@ -122,10 +127,6 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mntSairActionPerformed
 
-    private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
-        new CadastroMateriais().setVisible(true);
-    }//GEN-LAST:event_mntAddMateriaisActionPerformed
-
     private void mniCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroActionPerformed
         new Cadastro().setVisible(true);
     }//GEN-LAST:event_mniCadastroActionPerformed
@@ -133,6 +134,14 @@ public class Principal extends javax.swing.JFrame {
     private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
         new Login().setVisible(true);
     }//GEN-LAST:event_mniLoginActionPerformed
+
+    private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
+        new CadastroMateriais().setVisible(true);
+    }//GEN-LAST:event_mntAddMateriaisActionPerformed
+
+    private void mniConsultarMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultarMateriaisActionPerformed
+       new Materiais().setVisible(true);
+    }//GEN-LAST:event_mniConsultarMateriaisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,11 +182,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu mnAcesso;
     private javax.swing.JMenu mnMateriais;
     private javax.swing.JMenuItem mniCadastro;
+    private javax.swing.JMenuItem mniConsultarMateriais;
     private javax.swing.JMenuItem mniLogin;
     private javax.swing.JMenuItem mntAddMateriais;
     private javax.swing.JMenuItem mntSair;

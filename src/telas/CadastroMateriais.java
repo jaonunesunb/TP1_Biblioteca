@@ -5,6 +5,10 @@
 package telas;
 
 import infosphere.Material;
+import infosphere.TipoMateriais;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Pegad
  */
 public class CadastroMateriais extends javax.swing.JFrame {
-    static ArrayList<Material> listaMateriais;
+    static ArrayList<Material> material;
     String[] metadata = new String[6];
     //String[] tiposDeMateriais = {"Livros", "Periódicos", "Lúdicos", "Audiovisuais", "Sonoros"};
     String botao;
@@ -23,44 +27,80 @@ public class CadastroMateriais extends javax.swing.JFrame {
      */
     public CadastroMateriais() {
         initComponents();
-        listaMateriais = new ArrayList();
         
-        // habilitar ou desabilitar botões
-       /* btnNovoMaterial.setEnabled(true);
+        btnNovoMaterial.setEnabled(true);
         btnSalvarMaterial.setEnabled(false);
         btnCancelarMaterial.setEnabled(false);
         btnEditarMaterial.setEnabled(false);
         btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(true);
-        btnOkMaterial.setEnabled(false);
 
         // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(false);
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        //txtTipo.setEnabled(false);
-        txtEditora.setEnabled(false);
-        txtAutores.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtClassificacaoIndicativa.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtQuantExemplares.setEnabled(false);
-        */
-    }
-    
-    public void carregarDadosTabelaMaterial() {
-       /* DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Acervo", 
-            "Nome", "Tipo", "Número de exemplares"}, 0);
+        txtCodAcervo.setEnabled(true);
+        txtNomeMaterial.setEnabled(true);
+        txaDescricaoMaterial.setEnabled(true);
+        txtEdition.setEnabled(true);
+        txtNumPaginas.setEnabled(true);
+        txtEditora.setEnabled(true);
+        txtAutor.setEnabled(true);
+        txtAnoPublicacao.setEnabled(true);
+        txtDimensions.setEnabled(true);
+        txtCDU.setEnabled(true);
+        txtIdioma.setEnabled(true);
+        txtAssuntos.setEnabled(true);
         
-        for (int i = 0; i < listaMateriais.size(); i++) {
-            Object linha[] = new Object[] {listaMateriais.get(i).getCodigoAcervo(),
-                                           listaMateriais.get(i).getNome(),
-                                           listaMateriais.get(i).getTipoMaterial(),
-                                           listaMateriais.get(i).getNumExemplares()};
-            modelo.addRow(linha);
-                    }
-        tblMateriais.setModel(modelo);*/
+        cmbTipoMaterial.setEnabled(true);
+        
+    }
+        private void clearText() {
+            txtCodAcervo.setText("");
+            txtNomeMaterial.setText("");
+            txaDescricaoMaterial.setText("");
+            txtEdition.setText("");
+            txtNumPaginas.setText("");
+            txtEditora.setText("");
+            txtAutor.setText("");
+            txtAnoPublicacao.setText("");
+            txtDimensions.setText("");
+            txtCDU.setText("");
+            txtIdioma.setText("");
+            txtAssuntos.setText("");
+    }
+        private void resetState() {
+            clearText();
+            
+            btnNovoMaterial.setEnabled(true);
+            btnSalvarMaterial.setEnabled(false);
+            btnCancelarMaterial.setEnabled(false);
+            btnEditarMaterial.setEnabled(false);
+            btnExcluirMaterial.setEnabled(false);
+
+            // habilitar ou desabilitar texto
+            txtCodAcervo.setEnabled(false);
+            txtNomeMaterial.setEnabled(false);
+            txaDescricaoMaterial.setEnabled(false);
+            txtEdition.setEnabled(false);
+            txtNumPaginas.setEnabled(false);
+            txtEditora.setEnabled(false);
+            txtAutor.setEnabled(false);
+            txtAnoPublicacao.setEnabled(false);
+            txtDimensions.setEnabled(false);
+            txtCDU.setEnabled(false);
+            txtIdioma.setEnabled(false);
+            txtAssuntos.setEnabled(false);
+
+            cmbTipoMaterial.setEnabled(false);
+    }
+
+    private void saveMateriais() {
+        try {
+            FileOutputStream fos = new FileOutputStream("materiais.tmp");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(material);
+            oos.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar materiais: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(e);
+        }
     }
 
     /**
@@ -83,28 +123,33 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txaDescricaoMaterial = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbTipoMaterial = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtAutor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtEditora = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtCDU = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNumPaginas = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtDimensions = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtEdition = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtAssuntos = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtAnoPublicacao = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtIdioma = new javax.swing.JTextField();
         btnSalvarMaterial = new javax.swing.JButton();
         btnEditarMaterial = new javax.swing.JButton();
         btnCancelarMaterial = new javax.swing.JButton();
         btnExcluirMaterial = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnNovoMaterial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Materiais");
@@ -119,7 +164,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel2.setText("Código de Acervo");
 
-        jLabel3.setText("Nome");
+        jLabel3.setText("Título");
 
         txaDescricaoMaterial.setColumns(20);
         txaDescricaoMaterial.setRows(5);
@@ -129,7 +174,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel5.setText("Tipo do material");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livro", "Periódico", "Audiovisual", "Sonoro" }));
+        cmbTipoMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Livro", "Periódico", "Audiovisual", "Sonoro" }));
 
         jButton3.setText("Pesquisar");
 
@@ -149,6 +194,10 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jLabel12.setText("Assuntos");
 
+        jLabel11.setText("Ano de publicação");
+
+        jLabel13.setText("Idioma");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,24 +214,28 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbTipoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(txtCDU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(txtEditora, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAutor, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))
+                    .addComponent(txtAssuntos, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtDimensions, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(885, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +261,11 @@ public class CadastroMateriais extends javax.swing.JFrame {
                                                 .addComponent(jButton3))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(170, 170, 170)
-                                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(jLabel11)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -234,32 +291,36 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtAnoPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCDU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumPaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDimensions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAssuntos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -295,6 +356,13 @@ public class CadastroMateriais extends javax.swing.JFrame {
 
         jButton2.setText("Exemplares");
 
+        btnNovoMaterial.setText("Novo");
+        btnNovoMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoMaterialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -307,13 +375,15 @@ public class CadastroMateriais extends javax.swing.JFrame {
                 .addComponent(btnSalvarMaterial)
                 .addGap(18, 18, 18)
                 .addComponent(btnEditarMaterial)
-                .addGap(74, 74, 74)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(btnNovoMaterial)
+                .addGap(49, 49, 49)
                 .addComponent(btnCancelarMaterial)
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(btnExcluirMaterial)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnFecharMaterial)
                 .addGap(37, 37, 37))
         );
@@ -328,7 +398,8 @@ public class CadastroMateriais extends javax.swing.JFrame {
                     .addComponent(btnCancelarMaterial)
                     .addComponent(btnExcluirMaterial)
                     .addComponent(jButton2)
-                    .addComponent(btnFecharMaterial))
+                    .addComponent(btnFecharMaterial)
+                    .addComponent(btnNovoMaterial))
                 .addContainerGap())
         );
 
@@ -337,7 +408,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
-      /* int i = tblMateriais.getSelectedRow();
+      /*int i = tblMateriais.getSelectedRow();
         
         if (i >= 0 && i < listaMateriais.size()) {
             listaMateriais.remove(i);
@@ -356,111 +427,51 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtEditora.setText("");
         txtQuantExemplares.setText("");
 
-        // habilitar ou desabilitar botões
-        btnSalvarMaterial.setEnabled(false);
-        btnCancelarMaterial.setEnabled(false);
-        btnEditarMaterial.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnPesquisarMaterial.setEnabled(true);
-        btnOkMaterial.setEnabled(false);
-
-        // habilitar ou desabilitar texto
-        txtCodAcervo.setEnabled(false);
-        txtNomeMaterial.setEnabled(false);
-        txaDescricaoMaterial.setEnabled(false);
-        txtTitulo.setEnabled(false);
-        //txtTipo.setEnabled(false);
-        txtEditora.setEnabled(false);
-        txtAutores.setEnabled(false);
-        txtAnoPublicacao.setEnabled(false);
-        txtClassificacaoIndicativa.setEnabled(false);
-        txtIdioma.setEnabled(false);
-        txtQuantExemplares.setEnabled(false);
-        */
+        resetState();*/
+        
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
     private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
-         /*if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
-                txaDescricaoMaterial.getText().equals("") || txtTitulo.getText().equals("") || 
-                txtAutores.getText().equals("") || 
-                txtAnoPublicacao.getText().equals("") || txtEditora.getText().equals("") ||
-                txtClassificacaoIndicativa.getText().equals("") || txtIdioma.getText().equals("") ||
-                txtQuantExemplares.getText().equals("")) {
+         if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
+                txaDescricaoMaterial.getText().equals("") || txtEdition.getText().equals("") || 
+                txtEditora.getText().equals("") || 
+                 txtAutor.getText().equals("")|| 
+                 txtAnoPublicacao.getText().equals("") || 
+                 txtCDU.getText().equals("") || 
+                 txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
+                || txtDimensions.getText().equals("") 
+                || txtAssuntos.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }
         else {
              // get de dados
-            String acervo = txtCodAcervo.getText();
-            String nome = txtNomeMaterial.getText();
-            String descricao = txaDescricaoMaterial.getText();
-            String tituloAlternativo = txtTitulo.getText();
-            //String tipo = txtTipo.getText();
-            String autores = txtAutores.getText();
-            String anoPublicacao = txtAnoPublicacao.getText();
-            String  idioma = txtIdioma.getText();
-            String editora = txtEditora.getText();
-            String classificacaoEtaria = txtClassificacaoIndicativa.getText();
-            int numExemplares = Integer.parseInt(txtQuantExemplares.getText());
+            String acervo = this.txtCodAcervo.getText();
+            String nome = this.txtNomeMaterial.getText();
+            String descricao = this.txaDescricaoMaterial.getText();
+            String tituloAlternativo = this.txtNomeMaterial.getText();
+            String tipoSelecionado = String.valueOf(this.cmbTipoMaterial.getSelectedItem());
+            TipoMateriais tipo = TipoMateriais.valueOf(tipoSelecionado);
+            String autores = this.txtAutor.getText();
+            String anoPublicacao = this.txtAnoPublicacao.getText();
+            String  idioma = this.txtIdioma.getText();
+            String editora = this.txtEditora.getText();
+            String edicao = this.txtEdition.getText();
+            String CDU = this.txtCDU.getText();
+            String dimencoes = this.txtDimensions.getText();
+            String assuntos = this.txtAssuntos.getText();
+            
             
             metadata[0] = tituloAlternativo;
-            metadata[1] = autores;
-            metadata[2] = anoPublicacao;
-            metadata[3] = idioma;
-            metadata[4] = editora;
-            metadata[5] = classificacaoEtaria;
-     
-            if (botao.equals("novo")) {
-                Material material = new Material(acervo, nome, descricao, tipo, metadata, numExemplares);
-            
-                listaMateriais.add(material);
-
-                JOptionPane.showMessageDialog(null, "Material cadastrado com sucesso", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else if (botao.equals("editar")) {
-                int i = tblMateriais.getSelectedRow();
-                
-                listaMateriais.get(i).setCodigoAcervo(acervo);
-                listaMateriais.get(i).setNome(nome);
-                //listaMateriais.get(i).setDescricao(descricao);
-                listaMateriais.get(i).setNumExemplares(numExemplares);
-                listaMateriais.get(i).setTipoMaterial(tipo);
-  
-                
-                JOptionPane.showMessageDialog(null, "Registro alterado com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-            }
-            
-                carregarDadosTabelaMaterial();
-                // habilitar ou desabilitar botões
-                btnNovoMaterial.setEnabled(true);
-                btnSalvarMaterial.setEnabled(false);
-                btnCancelarMaterial.setEnabled(false);
-                btnEditarMaterial.setEnabled(false);
-                btnExcluirMaterial.setEnabled(false);
-                btnPesquisarMaterial.setEnabled(true);
-                btnOkMaterial.setEnabled(false);
-
-                // habilitar ou desabilitar texto
-                txtCodAcervo.setEnabled(false);
-                txtNomeMaterial.setEnabled(false);
-                txaDescricaoMaterial.setEnabled(false);
-                txtTitulo.setEnabled(false);
-                txtAutores.setEnabled(false);
-                txtAnoPublicacao.setEnabled(false);
-                txtClassificacaoIndicativa.setEnabled(false);
-                txtIdioma.setEnabled(false);
-                txtQuantExemplares.setEnabled(false);
-                 // limpar campos
-                 txtCodAcervo.setText("");
-                txtNomeMaterial.setText("");
-                txaDescricaoMaterial.setText("");
-                txtTitulo.setText("");
-                txtAutores.setText("");
-                txtAnoPublicacao.setText("");
-                txtClassificacaoIndicativa.setText("");
-                txtIdioma.setText("");
-                txtEditora.setText("");
-                txtQuantExemplares.setText("");
-        }*/
+            metadata[1] = anoPublicacao;
+            metadata[2] = idioma;
+            metadata[3] = editora;
+            metadata[4] = CDU;
+            metadata[5] = dimencoes;
+            metadata[6] = assuntos;
+            new Material(acervo, nome, autores, descricao, edicao, metadata, 0, tipo);
+            saveMateriais();
+            resetState();
+        }
     }//GEN-LAST:event_btnSalvarMaterialActionPerformed
 
     private void btnFecharMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharMaterialActionPerformed
@@ -468,39 +479,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFecharMaterialActionPerformed
 
     private void btnCancelarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarMaterialActionPerformed
-             // habilitar ou desabilitar botões
-                /*btnNovoMaterial.setEnabled(true);
-                btnSalvarMaterial.setEnabled(false);
-                btnCancelarMaterial.setEnabled(false);
-                btnEditarMaterial.setEnabled(false);
-                btnExcluirMaterial.setEnabled(false);
-                btnPesquisarMaterial.setEnabled(true);
-                btnOkMaterial.setEnabled(false);
-
-                // habilitar ou desabilitar texto
-                txtCodAcervo.setEnabled(false);
-                txtNomeMaterial.setEnabled(false);
-                txaDescricaoMaterial.setEnabled(false);
-                txtTitulo.setEnabled(false);
-                txtAutores.setEnabled(false);
-                txtEditora.setEnabled(false);
-                //txtTipo.setEnabled(false);
-                txtAnoPublicacao.setEnabled(false);
-                txtClassificacaoIndicativa.setEnabled(false);
-                txtIdioma.setEnabled(false);
-                txtQuantExemplares.setEnabled(false);
-                 // limpar campos
-                 txtCodAcervo.setText("");
-                txtNomeMaterial.setText("");
-                txaDescricaoMaterial.setText("");
-                txtTitulo.setText("");
-                txtAutores.setText("");
-                txtAnoPublicacao.setText("");
-                txtClassificacaoIndicativa.setText("");
-                txtIdioma.setText("");
-                txtEditora.setText("");
-                txtQuantExemplares.setText("");
-                */
+        resetState();     
     }//GEN-LAST:event_btnCancelarMaterialActionPerformed
 
     private void btnEditarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMaterialActionPerformed
@@ -529,6 +508,30 @@ public class CadastroMateriais extends javax.swing.JFrame {
         txtCodAcervo.requestFocus();
         */
     }//GEN-LAST:event_btnEditarMaterialActionPerformed
+
+    private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
+        btnNovoMaterial.setEnabled(true);
+        btnSalvarMaterial.setEnabled(false);
+        btnCancelarMaterial.setEnabled(false);
+        btnEditarMaterial.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
+        
+        txtCodAcervo.setEnabled(false);
+        txtNomeMaterial.setEnabled(false);
+        txaDescricaoMaterial.setEnabled(false);
+        txtEdition.setEnabled(false);
+        txtNumPaginas.setEnabled(false);
+        txtEditora.setEnabled(false);
+        txtAutor.setEnabled(false);
+        txtAnoPublicacao.setEnabled(false);
+        txtDimensions.setEnabled(false);
+        txtCDU.setEnabled(false);
+        txtIdioma.setEnabled(false);
+        txtAssuntos.setEnabled(false);
+        
+        cmbTipoMaterial.setEnabled(false);
+        txtCodAcervo.requestFocus();
+    }//GEN-LAST:event_btnNovoMaterialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -571,14 +574,17 @@ public class CadastroMateriais extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarMaterial;
     private javax.swing.JButton btnExcluirMaterial;
     private javax.swing.JButton btnFecharMaterial;
+    private javax.swing.JButton btnNovoMaterial;
     private javax.swing.JButton btnSalvarMaterial;
+    private javax.swing.JComboBox<String> cmbTipoMaterial;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,15 +596,17 @@ public class CadastroMateriais extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextArea txaDescricaoMaterial;
+    private javax.swing.JTextField txtAnoPublicacao;
+    private javax.swing.JTextField txtAssuntos;
+    private javax.swing.JTextField txtAutor;
+    private javax.swing.JTextField txtCDU;
     private javax.swing.JTextField txtCodAcervo;
+    private javax.swing.JTextField txtDimensions;
+    private javax.swing.JTextField txtEdition;
+    private javax.swing.JTextField txtEditora;
+    private javax.swing.JTextField txtIdioma;
     private javax.swing.JTextField txtNomeMaterial;
+    private javax.swing.JTextField txtNumPaginas;
     // End of variables declaration//GEN-END:variables
 }
