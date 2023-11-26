@@ -4,35 +4,21 @@
  */
 package infosphere;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author Pegad
  */
-class Funcionario extends Usuario {
-    public Funcionario(String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
-        super(TipoUsuario.FUNCIONARIO, nome, cpf, email, senha, dataDeNascimento, multaTotal);
+public class Funcionario extends Usuario {
+    public Funcionario(String nome, String cpf, String email, String senha, LocalDate dataDeNascimento) {
+        super(nome, cpf, email, senha, dataDeNascimento);
         this.numDias = 30;
         this.numMateriais = 15;
     }
-
-    public void suspender(String senhaAdmin) {
-        if (senhaAdmin.equals("senhaAdmin")) {
-            suspenso = true;
-            System.out.println("Usuário suspenso.");
-        } else {
-            System.out.println("Senha de administração incorreta. Operação não permitida.");
-        }
-    }
-
-    public void removerSuspensao(String senhaAdmin) {
-        if (senhaAdmin.equals("senhaAdmin")) {
-            suspenso = false;
-            System.out.println("Suspensão removida.");
-        } else {
-            System.out.println("Senha de administração incorreta. Operação não permitida.");
-        }
-    }
     
+    @Override
+    public String parseTipoUsuario() {
+        return "Funcionário";
+    }
 }
