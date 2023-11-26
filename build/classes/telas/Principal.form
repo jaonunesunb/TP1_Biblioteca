@@ -45,6 +45,14 @@
             <Property name="text" type="java.lang.String" value="Materiais"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mniConsultarMateriais">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultar materiais"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniConsultarMateriaisActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mntAddMateriais">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adicionar materiais"/>
@@ -52,11 +60,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mntAddMateriaisActionPerformed"/>
               </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de transa&#xe7;&#xf5;es"/>
-              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>
