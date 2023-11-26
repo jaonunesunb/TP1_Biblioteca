@@ -4,17 +4,22 @@
  */
 package infosphere;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author Pegad
  */
 public class Estudante extends Usuario {
-    public Estudante(String nome, String cpf, String email, String senha, Date dataDeNascimento, Double multaTotal) {
-        super(TipoUsuario.ESTUDANTE, nome, cpf, email, senha, dataDeNascimento, multaTotal);
+    public Estudante(String nome, String cpf, String email, String senha, LocalDate dataDeNascimento) {
+        super(nome, cpf, email, senha, dataDeNascimento);
         this.numDias = 15;
         this.numMateriais = 10;
+    }
+    
+    @Override
+    public String parseTipoUsuario() {
+        return "Estudante";
     }
 }
 
