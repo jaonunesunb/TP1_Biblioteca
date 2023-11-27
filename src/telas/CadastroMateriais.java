@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CadastroMateriais extends javax.swing.JFrame {
     static ArrayList<Material> material;
-    String[] metadata = new String[6];
+    String[] metadata = new String[7];
     //String[] tiposDeMateriais = {"Livros", "Periódicos", "Lúdicos", "Audiovisuais", "Sonoros"};
     String botao;
     /**

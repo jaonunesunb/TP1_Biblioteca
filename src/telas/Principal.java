@@ -140,7 +140,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mntAddMateriaisActionPerformed
 
     private void mniConsultarMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultarMateriaisActionPerformed
-       new Materiais().setVisible(true);
+       new ConsultaMateriais().setVisible(true);
     }//GEN-LAST:event_mniConsultarMateriaisActionPerformed
 
     /**
