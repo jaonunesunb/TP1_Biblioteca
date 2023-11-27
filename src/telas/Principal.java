@@ -32,11 +32,9 @@ public class Principal extends javax.swing.JFrame {
         mnAcesso = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mniCadastro = new javax.swing.JMenuItem();
-        mniLogin = new javax.swing.JMenuItem();
         mntSair = new javax.swing.JMenuItem();
         mnMateriais = new javax.swing.JMenu();
         mniConsultarMateriais = new javax.swing.JMenuItem();
-        mntAddMateriais = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/3d_library_folder_20529 (1).png")).getImage());
@@ -56,14 +54,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnAcesso.add(mniCadastro);
-
-        mniLogin.setText("Login");
-        mniLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniLoginActionPerformed(evt);
-            }
-        });
-        mnAcesso.add(mniLogin);
 
         mntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/log_out_icon_197724.png"))); // NOI18N
         mntSair.setText("Sair");
@@ -85,14 +75,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnMateriais.add(mniConsultarMateriais);
-
-        mntAddMateriais.setText("Adicionar materiais");
-        mntAddMateriais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mntAddMateriaisActionPerformed(evt);
-            }
-        });
-        mnMateriais.add(mntAddMateriais);
 
         jMenuBar1.add(mnMateriais);
 
@@ -134,10 +116,6 @@ public class Principal extends javax.swing.JFrame {
     private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
         //new Login().setVisible(true);
     }//GEN-LAST:event_mniLoginActionPerformed
-
-    private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
-        new CadastroMateriais().setVisible(true);
-    }//GEN-LAST:event_mntAddMateriaisActionPerformed
 
     private void mniConsultarMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniConsultarMateriaisActionPerformed
        new ConsultaMateriais().setVisible(true);
@@ -187,8 +165,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnMateriais;
     private javax.swing.JMenuItem mniCadastro;
     private javax.swing.JMenuItem mniConsultarMateriais;
-    private javax.swing.JMenuItem mniLogin;
-    private javax.swing.JMenuItem mntAddMateriais;
     private javax.swing.JMenuItem mntSair;
     // End of variables declaration//GEN-END:variables
 }
