@@ -6,12 +6,15 @@ package telas;
 
 import infosphere.Exemplar;
 import infosphere.Material;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,18 +23,22 @@ import javax.swing.table.DefaultTableModel;
  * @author Pegad
  */
 public class ConsultaMateriais extends javax.swing.JFrame {
+    
+    ArrayList<Material> materiais;
+    ArrayList<Exemplar> exemplares;
 
     /**
      * Creates new form ConsultaMateriais
-     */
-    ArrayList<Material> material;
-    ArrayList<Exemplar> exemplar;
-    
+     */ 
     public ConsultaMateriais() {
         initComponents();
-        loadMateriais();
-        loadExemplares();
-        carregarDadosTabelaMaterial(); 
+        
+        this.loadMateriais();
+        System.out.println(materiais);
+        // loadExemplares();
+        
+        this.carregarDadosTabelaMaterial(); 
+        
         btnNovoExemplar.setEnabled(false);
         btnEditarExemplar.setEnabled(false);
         btnDeletarExemplar.setEnabled(false);
@@ -375,18 +382,26 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- private void loadMateriais() {
-        File materiaisFile = new File("materiais.tmp");
+    
+    private void loadMateriais() {
+        File materiaisFile = new File("materials.tmp");
         if(!materiaisFile.exists() || materiaisFile.isDirectory()) { 
-            this.material = new ArrayList<>();
+            System.out.println("Não existem materiais ainda.");
+            
+            this.materiais = new ArrayList();
             return;
         }
         
         try {
-            FileInputStream fis = new FileInputStream("materiais.tmp");
+            FileInputStream fis = new FileInputStream("materials.tmp");
             ObjectInputStream ois = new ObjectInputStream(fis);
+            
             ArrayList<Material> loadedMateriais = (ArrayList<Material>) ois.readObject();
-            this.material = loadedMateriais;
+            
+            System.out.println("Materiais encontrados");
+            System.out.println(loadedMateriais);
+            
+            this.materiais = loadedMateriais;
             
             ois.close();
         } catch (IOException e) {
@@ -396,10 +411,10 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         }
     }
  
-  private void loadExemplares() {
+    private void loadExemplares() {
         File exemplaresFile = new File("exemplares.tmp");
         if(!exemplaresFile.exists() || exemplaresFile.isDirectory()) { 
-            this.exemplar = new ArrayList<>();
+            this.exemplares = new ArrayList();
             return;
         }
         
@@ -407,7 +422,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
             FileInputStream fis = new FileInputStream("exemplares.tmp");
             ObjectInputStream ois = new ObjectInputStream(fis);
             ArrayList<Exemplar> loadedMateriais = (ArrayList<Exemplar>) ois.readObject();
-            this.exemplar = loadedMateriais;
+            this.exemplares = loadedMateriais;
             
             ois.close();
         } catch (IOException e) {
@@ -417,54 +432,54 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         }
     }
     
-    public void carregarDadosTabelaMaterial() {
-           DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edição", 
-                "Título"}, 0);
-           if (this.material.size() >= 1) {
-            for (int i = 0; i < this.material.size(); i++) {
-                Object linha[] = new Object[] {this.material.get(i).getEdicao(),
-                                               this.material.get(i).getNome(),
-                                               };
-                modelo.addRow(linha);
-                        }
-            tblMateriais.setModel(modelo);
-            carregarDadosTabelaExemplares();
+    private void carregarDadosTabelaMaterial() {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edição", "Título"}, 0);
+           
+        System.out.println(materiais);
+        for (int i = 0; i < this.materiais.size(); i++) {
+            Object linha[] = new Object[] {
+                this.materiais.get(i).getEdicao(),
+                this.materiais.get(i).getNome(),
+            };
+            modelo.addRow(linha);
         }
+        
+        tblMateriais.setModel(modelo);
+        // carregarDadosTabelaExemplares();
     }
     
-    public void carregarDadosTabelaExemplares() {
+    private void carregarDadosTabelaExemplares() {
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Exemplar", 
-                "Reimpressão", "Disponível", "Localização", "Núm. renov"}, 0);
+            "Reimpressão", "Disponível", "Localização", "Núm. renov"}, 0);
 
         // Itera sobre os materiais para acessar os exemplares de cada material
-        for (Material mat : this.material) {
-            List<Exemplar> exemplares = mat.getExemplaresMaterial();
-            if (exemplares.size() >= 1) {
-                for (Exemplar ex : exemplares) {
-                    Object linha[] = new Object[] {
-                        ex.getCodigoExemplar(),
-                        ex.getReimpr(),
-                        ex.isEmprestado(),
-                        ex.getLocalizacao(),
-                        ex.getRenovacoes(),
-                    };
-                    modelo.addRow(linha);
-                }
+        for (Material mat : this.materiais) {
+            List<Exemplar> exemplaresMaterial = mat.getExemplaresMaterial();
+            for (Exemplar ex : exemplaresMaterial) {
+                Object linha[] = new Object[] {
+                    ex.getCodigoExemplar(),
+                    ex.getReimpr(),
+                    ex.isEmprestado(),
+                    ex.getLocalizacao(),
+                    ex.getRenovacoes(),
+                };
+                modelo.addRow(linha);
             }
         }
+        
         tblExemplares.setModel(modelo);
     }
 
     private void carregarTabelaMateriaisFiltrada(String titulo, String codAcervo) {
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edicao", "Título"}, 0);
         
-        for (int i = 0; i < this.material.size(); i++){
-            if (this.material.get(i).getNome().toLowerCase().contains(titulo.toLowerCase())
-                    || this.material.get(i).getCodigoAcervo().contains(codAcervo)
+        for (int i = 0; i < this.materiais.size(); i++){
+            if (this.materiais.get(i).getNome().toLowerCase().contains(titulo.toLowerCase())
+                    || this.materiais.get(i).getCodigoAcervo().contains(codAcervo)
             ) {
                 Object[] linha = new Object[]{
-                    this.material.get(i).getEdicao(),
-                    this.material.get(i).getNome()
+                    this.materiais.get(i).getEdicao(),
+                    this.materiais.get(i).getNome()
                 };
 
                 modelo.addRow(linha);
@@ -489,9 +504,9 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
     public Material getMaterialByAcervo(String cod) {
-        for (int i = 0; i < this.material.size(); i++){
-            if (this.material.get(i).getCodigoAcervo().contains(cod)) {
-                return this.material.get(i);
+        for (int i = 0; i < this.materiais.size(); i++){
+            if (this.materiais.get(i).getCodigoAcervo().contains(cod)) {
+                return this.materiais.get(i);
             }
         }
           return null;
@@ -505,11 +520,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     private void tblMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriaisMouseClicked
         int i = tblMateriais.getSelectedRow();
         
-        txfCodAcervo.setText(this.material.get(i).getCodigoAcervo());
-        txfTitulo.setText(this.material.get(i).getNome());
-        txfAutor.setText(this.material.get(i).getAutor());
-        txaDescricao.setText(this.material.get(i).getDescricao());
-        cmbTipoMaterial.setSelectedItem(this.material.get(i).getTipoMateriais());
+        txfCodAcervo.setText(this.materiais.get(i).getCodigoAcervo());
+        txfTitulo.setText(this.materiais.get(i).getNome());
+        txfAutor.setText(this.materiais.get(i).getAutor());
+        txaDescricao.setText(this.materiais.get(i).getDescricao());
+        cmbTipoMaterial.setSelectedItem(this.materiais.get(i).getTipoMateriais());
         
         btnNovoExemplar.setEnabled(true);
         btnEditarExemplar.setEnabled(false);

@@ -40,23 +40,23 @@ public class Emprestimo extends javax.swing.JFrame {
         this.users = new ArrayList();
         
         
-        bntPesquisar.setEnabled(true);
-        btnNovoUsuario.setEnabled(true);
-        
-        bntSalvarUsuario.setEnabled(false);
-        btnEditarUsuario.setEnabled(false);
-        btnRemoverUsuario.setEnabled(false);
-        bntCancelar.setEnabled(false);
-        bntCPFOK.setEnabled(false);
-        bntEmailOK.setEnabled(false);
-        
-        txfCpf.setEnabled(false);
-        txfEmail.setEnabled(false);
-        txfData.setEnabled(false);
-        txfNome.setEnabled(false);
-        txfSenha.setEnabled(false);
-        
-        cmbFuncao.setEnabled(false);
+//        bntPesquisar.setEnabled(true);
+//        btnNovoUsuario.setEnabled(true);
+//        
+//        bntSalvarUsuario.setEnabled(false);
+//        btnEditarUsuario.setEnabled(false);
+//        btnRemoverUsuario.setEnabled(false);
+//        bntCancelar.setEnabled(false);
+//        bntCPFOK.setEnabled(false);
+//        bntEmailOK.setEnabled(false);
+//        
+//        txfCpf.setEnabled(false);
+//        txfEmail.setEnabled(false);
+//        txfData.setEnabled(false);
+//        txfNome.setEnabled(false);
+//        txfSenha.setEnabled(false);
+//        
+//        cmbFuncao.setEnabled(false);
     }
     
     private void carregarTabelaExemplares(String cpf, String codigoExemplar) {

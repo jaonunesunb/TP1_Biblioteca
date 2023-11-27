@@ -21,7 +21,7 @@ public class Exemplar extends Material implements Serializable {
     protected String reimpr;
     protected Localizacao localizacao;
 
-    public Exemplar(String codigo, String codigoExemplar,String nome, String autor, Date dataDevolucao, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+    public Exemplar(String codigo, String codigoExemplar,String nome, String autor, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
         super(codigo, nome, autor, descricao, edicao, metadata, numExemplares, tipoMateriais);
         this.codigoExemplar = codigoExemplar;
         this.reimpr = reimpr;
@@ -30,17 +30,19 @@ public class Exemplar extends Material implements Serializable {
         this.emprestado = false;
         this.reservado = false;
         this.localizacao = localizacao;
-        this.dataDevolucao = dataDevolucao;
     }
-    public Exemplar(String codigo, String codigoExemplar, Material material, Date dataDevolucao, Double valorMulta, String descricao, String edicao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
-    super(material.getCodigoAcervo(), material.getNome(), material.getAutor(), material.getDescricao(), material.getEdicao(), material.getMetadata(), material.getNumExemplares(), tipoMateriais);
-    this.codigoExemplar = codigoExemplar;
-    this.renovacoes = 0;
-    this.valorMulta = 0.0;
-    this.emprestado = false;
-    this.reservado = false;
-    this.dataDevolucao = dataDevolucao;
-}
+    
+    public Exemplar(String codigo, String codigoExemplar, Material material, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+        super(material.getCodigoAcervo(), material.getNome(), material.getAutor(), material.getDescricao(), material.getEdicao(), material.getMetadata(), material.getNumExemplares(), tipoMateriais);
+        
+        this.codigoExemplar = codigoExemplar;
+        this.reimpr = reimpr;
+        this.renovacoes = 0;
+        this.valorMulta = 0.0;
+        this.emprestado = false;
+        this.reservado = false;
+    }
+    
     public String getCodigoExemplar() {
         return codigoExemplar;
     }
@@ -71,14 +73,6 @@ public class Exemplar extends Material implements Serializable {
 
     public boolean isEmprestado() {
         return emprestado;
-    }
-    
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
     }
 
     public Double getValorMulta() {

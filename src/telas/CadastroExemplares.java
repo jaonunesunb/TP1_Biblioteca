@@ -8,15 +8,18 @@ import infosphere.Exemplar;
 import infosphere.Localizacao;
 import infosphere.Material;
 import infosphere.TipoMateriais;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import static telas.CadastroMateriais.material;
 
 /**
  *
@@ -25,11 +28,17 @@ import static telas.CadastroMateriais.material;
 public class CadastroExemplares extends javax.swing.JFrame {
 
     /**
-     * Creates new form exemplares
+     * Creates new form CadastroExemplares
      */
-    private ConsultaMateriais consultaMateriais;
+    ArrayList<Material> materials;
+    ArrayList<Exemplar> exemplares;
+    
     public CadastroExemplares() {
         initComponents();
+        
+        this.loadMaterials();
+        this.loadExemplares();
+        
         resetState();
     }
     
@@ -42,18 +51,104 @@ public class CadastroExemplares extends javax.swing.JFrame {
     private void resetState() {
         clearText();
         
-        txtCodExemp.setEnabled(false);
-        cmbLocalExemplar.setEnabled(false);
-        txfReimpr.setEnabled(false);
-        cbmLocalizacaoExemplar.setEnabled(false);
-        txfRenovacoes.setEnabled(false);
+        txtCodExemp.setEnabled(true);
+        cmbLocalExemplar.setEnabled(true);
+        txfReimpr.setEnabled(true);
+        cbmLocalizacaoExemplar.setEnabled(true);
+        txfRenovacoes.setEnabled(true);
         
-        btnNovoExemplar.setEnabled(true);
-        btnSalvarExemplar.setEnabled(false);
-        btnEditarExemplar.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnCancelarExemplar.setEnabled(false);
+        btnSalvarExemplar.setEnabled(true);
+        btnCancelarExemplar.setEnabled(true);
     }
+    
+    private int findMaterialIndexByAcervo(String acervo) {
+        for (int i = 0; i < this.materials.size(); i++) {
+            if (this.materials.get(i).getCodigoAcervo().equals(acervo)) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    private int findExemplarIndexByCodigo(String codigoExemplar) {
+        for (int i = 0; i < this.exemplares.size(); i++) {
+            if (this.exemplares.get(i).getCodigoExemplar().equals(codigoExemplar)) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    private void saveMaterials() {
+        try {
+            FileOutputStream fos = new FileOutputStream("materials.tmp");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.materials);
+            oos.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar materiais: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(e);
+        }
+    }
+    
+    private void loadMaterials() {
+        File materialsFile = new File("materials.tmp");
+        
+        if(!materialsFile.exists() || materialsFile.isDirectory()) { 
+            this.materials = new ArrayList();
+            return;
+        }
+        
+        try {
+            FileInputStream fis = new FileInputStream("materials.tmp");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Material> loadedMaterials = (ArrayList<Material>) ois.readObject();
+            this.materials = loadedMaterials;
+            
+            ois.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava carregar materiais: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, String.format("Arquivo de materiais corrompido: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
+    private void saveExemplares() {
+        try {
+            FileOutputStream fos = new FileOutputStream("exemplares.tmp");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.materials);
+            oos.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar exemplares: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(e);
+        }
+    }
+    
+    private void loadExemplares() {
+        File exemplaresFile = new File("exemplares.tmp");
+        
+        if(!exemplaresFile.exists() || exemplaresFile.isDirectory()) { 
+            this.exemplares = new ArrayList();
+            return;
+        }
+        
+        try {
+            FileInputStream fis = new FileInputStream("exemplares.tmp");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Exemplar> loadedExemplares = (ArrayList<Exemplar>) ois.readObject();
+            this.exemplares = loadedExemplares;
+            
+            ois.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava carregar exemplares: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, String.format("Arquivo de exemplares corrompido: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,70 +159,29 @@ public class CadastroExemplares extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtCodExemp = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        cmbLocalExemplar = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txfReimpr = new javax.swing.JTextField();
-        cbmLocalizacaoExemplar = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        cbmLocalizacaoExemplar = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txfRenovacoes = new javax.swing.JTextField();
-        btnNovoExemplar = new javax.swing.JButton();
         btnCancelarExemplar = new javax.swing.JButton();
-        btnEditarExemplar = new javax.swing.JButton();
         btnSalvarExemplar = new javax.swing.JButton();
-        btnExcluirMaterial = new javax.swing.JButton();
-        btnSairExemplares = new javax.swing.JButton();
-        cmbLocalExemplar = new javax.swing.JComboBox<>();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Exemplares"));
 
         jLabel1.setText("Código de exemplar");
 
         jLabel2.setText("Disponibilidade");
-
-        jLabel3.setText("Reimpressão");
-
-        cbmLocalizacaoExemplar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acervo geral", "Obras raras", "Espaço som", "Multi-meios" }));
-
-        jLabel4.setText("Localização");
-
-        jLabel5.setText("Renovações");
-
-        btnNovoExemplar.setText("Novo");
-        btnNovoExemplar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoExemplarActionPerformed(evt);
-            }
-        });
-
-        btnCancelarExemplar.setText("Cancelar");
-        btnCancelarExemplar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarExemplarActionPerformed(evt);
-            }
-        });
-
-        btnEditarExemplar.setText("Editar");
-
-        btnSalvarExemplar.setText("Salvar");
-        btnSalvarExemplar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarExemplarActionPerformed(evt);
-            }
-        });
-
-        btnExcluirMaterial.setText("Excluir");
-
-        btnSairExemplares.setText("Sair");
-        btnSairExemplares.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSairExemplaresActionPerformed(evt);
-            }
-        });
 
         cmbLocalExemplar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponível", "Emprestado", "Processamento", "Restauro" }));
         cmbLocalExemplar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,113 +190,133 @@ public class CadastroExemplares extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Reimpressão");
+
+        jLabel4.setText("Localização");
+
+        cbmLocalizacaoExemplar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acervo geral", "Obras raras", "Espaço som", "Multi-meios" }));
+
+        jLabel5.setText("Renovações");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbmLocalizacaoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfReimpr, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfRenovacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodExemp, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(33, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCodExemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfReimpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbmLocalizacaoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txfRenovacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        btnCancelarExemplar.setText("Cancelar");
+        btnCancelarExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarExemplarActionPerformed(evt);
+            }
+        });
+
+        btnSalvarExemplar.setText("Salvar");
+        btnSalvarExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarExemplarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCodExemp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txfRenovacoes, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cbmLocalizacaoExemplar, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfReimpr, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnNovoExemplar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalvarExemplar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditarExemplar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCancelarExemplar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluirMaterial))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(btnSairExemplares)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSalvarExemplar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCodExemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txfReimpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbmLocalizacaoExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txfRenovacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovoExemplar)
                     .addComponent(btnSalvarExemplar)
-                    .addComponent(btnEditarExemplar)
-                    .addComponent(btnCancelarExemplar)
-                    .addComponent(btnExcluirMaterial))
-                .addGap(35, 35, 35)
-                .addComponent(btnSairExemplares)
-                .addGap(21, 21, 21))
+                    .addComponent(btnCancelarExemplar))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void saveExemplares() {
-        try {
-            FileOutputStream fos = new FileOutputStream("exemplares.tmp");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(material);
-            oos.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar exemplar: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
-            System.out.println(e);
-        }
-    }
-    
+      
     private void btnSalvarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarExemplarActionPerformed
-        consultaMateriais = new ConsultaMateriais();  
         if (txtCodExemp.getText().equals("" ) 
             || txfReimpr.getText().equals("") 
             || txfRenovacoes.getText().equals("")) {
 
-            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
         }
         else {
              // get de dados
             String acervo = this.txtCodExemp.getText();
-            Material materialSelecionado = consultaMateriais.getMaterialByAcervo(acervo);
+            
+            int materialIndex = this.findMaterialIndexByAcervo(acervo);
+            if (materialIndex == -1) {
+                System.out.printf("Materiais: %s", this.materials);
+                JOptionPane.showMessageDialog(null, "Código de acervo não existe!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            
+            Material materialSelecionado = this.materials.get(materialIndex);
 
             String reimpr = this.txfReimpr.getText();
+            String codigoExemplar = this.txtCodExemp.getText();
             String localExemplar = String.valueOf(this.cmbLocalExemplar.getSelectedItem());
             String descricao = materialSelecionado.getDescricao();
             String edicao = materialSelecionado.getEdicao();
@@ -252,58 +326,46 @@ public class CadastroExemplares extends javax.swing.JFrame {
            
             Double valorMulta = 0.0;
             
-            if(localExemplar.equals("Disponível")) {
-                Boolean disponivel = true;
+            if (this.findExemplarIndexByCodigo(codigoExemplar) != -1) {
+                JOptionPane.showMessageDialog(null, "Código de exemplar já existe!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                return;
             }
-            else {
-               Boolean disponivel = false; 
+            
+            Boolean disponivel = localExemplar.equals("Disponível");
+            
+            Localizacao localizacao;
+            if (disponivel) {
+                localizacao = Localizacao.DISPONIVEL;
+            } else {
+                localizacao = Localizacao.valueOf(localExemplar.toUpperCase());
             }
-
-            // Obter a data de devolução convertendo a String para um objeto Date
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            String dataString = "01/01/2024"; // Data de exemplo
-            Date dataDeDevolucao = null;
-            try {
-                dataDeDevolucao = df.parse(dataString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            Localizacao localizacao = Localizacao.valueOf(localExemplar.toUpperCase());
     
             // Criar o exemplar com os argumentos corrigidos
-            Exemplar exemplar = new Exemplar(acervo, reimpr, materialSelecionado, dataDeDevolucao, valorMulta, descricao, edicao, metadata, numExemplares, localizacao, tipoMateriais);
+            Exemplar exemplar = new Exemplar(acervo, codigoExemplar, materialSelecionado, valorMulta, descricao, edicao, reimpr, metadata, numExemplares, localizacao, tipoMateriais);
 
-        // Adicionar o exemplar ao material
-        materialSelecionado.adicionarExemplar(exemplar);
-            saveExemplares();
+            // Adicionar o exemplar ao material
+            materialSelecionado.adicionarExemplar(exemplar);
+            
+            this.exemplares.add(exemplar);
+            this.materials.set(materialIndex, materialSelecionado);
+            
+            this.saveExemplares();
+            this.saveMaterials();
+                        
+            this.resetState();
+            this.setVisible(false);
+            
+            JOptionPane.showMessageDialog(null, "Exemplar adicionado com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }     
     }//GEN-LAST:event_btnSalvarExemplarActionPerformed
-
-    private void btnSairExemplaresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairExemplaresActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btnSairExemplaresActionPerformed
 
     private void cmbLocalExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocalExemplarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbLocalExemplarActionPerformed
 
-    private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
-        txtCodExemp.setEnabled(true);
-        cmbLocalExemplar.setEnabled(true);
-        txfReimpr.setEnabled(true);
-        cbmLocalizacaoExemplar.setEnabled(true);
-        txfRenovacoes.setEnabled(true);
-        
-        btnNovoExemplar.setEnabled(false);
-        btnSalvarExemplar.setEnabled(true);
-        btnEditarExemplar.setEnabled(false);
-        btnExcluirMaterial.setEnabled(false);
-        btnCancelarExemplar.setEnabled(true);
-    }//GEN-LAST:event_btnNovoExemplarActionPerformed
-
     private void btnCancelarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarExemplarActionPerformed
-        resetState();
+        this.resetState();
+        this.setVisible(false);
     }//GEN-LAST:event_btnCancelarExemplarActionPerformed
 
     /**
@@ -346,10 +408,6 @@ public class CadastroExemplares extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarExemplar;
-    private javax.swing.JButton btnEditarExemplar;
-    private javax.swing.JButton btnExcluirMaterial;
-    private javax.swing.JButton btnNovoExemplar;
-    private javax.swing.JButton btnSairExemplares;
     private javax.swing.JButton btnSalvarExemplar;
     private javax.swing.JComboBox<String> cbmLocalizacaoExemplar;
     private javax.swing.JComboBox<String> cmbLocalExemplar;
@@ -359,6 +417,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txfReimpr;
     private javax.swing.JTextField txfRenovacoes;
     private javax.swing.JTextField txtCodExemp;
