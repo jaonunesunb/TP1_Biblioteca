@@ -9,10 +9,14 @@ package infosphere;
  * @author Pegad
  */
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import java.io.Serializable;
 
+import java.util.ArrayList;
+
 public abstract class Usuario implements Serializable {
-    private static final long serialVersionUID = -299482035708790407L;
+    private static final long serialVersionUID = 1L;
     
     protected String nome;
     protected String cpf;
@@ -24,7 +28,8 @@ public abstract class Usuario implements Serializable {
     protected int numDias;
     protected int numMateriais;
      
-    private LocalDate dataSuspencao;
+    final ArrayList<Exemplar> exemplaresEmprestados;
+    final ArrayList<LocalDate> dataEmprestimos;
 
     public Usuario(String nome, String cpf, String email, String senha, LocalDate dataDeNascimento) {
         this.nome = nome;
@@ -32,8 +37,12 @@ public abstract class Usuario implements Serializable {
         this.dataDeNascimento = dataDeNascimento;
         this.email = email;
         this.senha = senha;
+        
         this.multaTotal = 0.0;
         this.suspenso = false;
+        
+        this.exemplaresEmprestados = new ArrayList();
+        this.dataEmprestimos = new ArrayList();
     }
     
     public abstract String parseTipoUsuario();
@@ -42,7 +51,6 @@ public abstract class Usuario implements Serializable {
         if (this.suspenso == true) return;
      
         this.suspenso = true;
-        this.dataSuspencao = LocalDate.now();
     }
 
     public void pagarMulta(String senhaAdmin) {
@@ -50,7 +58,64 @@ public abstract class Usuario implements Serializable {
         
         this.multaTotal = 0.0;
         this.suspenso = false;
-        this.dataSuspencao = null;
+    }
+    
+    public int findExemplarEmprestadoIndex(Exemplar exemplar) {
+        for (int i = 0; i < this.exemplaresEmprestados.size(); i++) {
+            if (this.exemplaresEmprestados.get(i).getCodigoExemplar().equals(exemplar.getCodigoExemplar())) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    public boolean renovar(Exemplar exemplar) {
+        int exemplarIndex = this.findExemplarEmprestadoIndex(exemplar);
+        if (exemplarIndex == -1) return false;
+        
+        boolean podeRenovar = exemplar.renovar();
+        if (!podeRenovar) return false;
+        
+        this.dataEmprestimos.set(exemplarIndex, LocalDate.now());
+        return true;
+    }
+    
+    public boolean emprestar(Exemplar exemplar) {
+        if (this.suspenso) return false;
+
+        boolean podeEmprestar = exemplar.emprestar();
+        if (!podeEmprestar) return false;
+        
+        this.exemplaresEmprestados.add(exemplar);
+        this.dataEmprestimos.add(LocalDate.now());
+        
+        return true;
+    }
+    
+    public boolean devolver(Exemplar exemplar) {
+        int exemplarIndex = this.findExemplarEmprestadoIndex(exemplar);
+        if (exemplarIndex == -1) return false;
+        
+        boolean podeDevolver = exemplar.devolver();
+        if (!podeDevolver) return false;
+
+        long numDiasAtraso = ChronoUnit.DAYS.between(
+                this.dataEmprestimos.get(exemplarIndex),
+                LocalDate.now()
+        );
+
+        if (numDiasAtraso > this.numDias) {
+            this.multaTotal =  exemplar.getValorMulta() * numDiasAtraso;
+            if (this.multaTotal > 0) {
+                this.suspenso = true;
+            }
+        }
+
+        this.exemplaresEmprestados.remove(exemplarIndex);
+        this.dataEmprestimos.remove(exemplarIndex);
+
+        return true;
     }
 
     public String getNome() {
@@ -123,5 +188,9 @@ public abstract class Usuario implements Serializable {
 
     public void setNumMateriais(int numMateriais) {
         this.numMateriais = numMateriais;
+    }
+    
+    public ArrayList<Exemplar> getExemplaresEmprestados() {
+        return this.exemplaresEmprestados;
     }
 }

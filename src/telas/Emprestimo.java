@@ -4,17 +4,104 @@
  */
 package telas;
 
+import infosphere.Exemplar;
+import infosphere.Usuario;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Pegad
  */
 public class Emprestimo extends javax.swing.JFrame {
+    ArrayList<Usuario> users;
 
     /**
      * Creates new form Emprestimo
      */
     public Emprestimo() {
         initComponents();
+    }
+    
+    private void clearText() {
+        txfCpf.setText("");
+        txfCodigo.setText("");
+    }
+    
+    private void resetState() {
+        this.clearText();
+        
+        this.users = new ArrayList();
+        
+        
+        bntPesquisar.setEnabled(true);
+        btnNovoUsuario.setEnabled(true);
+        
+        bntSalvarUsuario.setEnabled(false);
+        btnEditarUsuario.setEnabled(false);
+        btnRemoverUsuario.setEnabled(false);
+        bntCancelar.setEnabled(false);
+        bntCPFOK.setEnabled(false);
+        bntEmailOK.setEnabled(false);
+        
+        txfCpf.setEnabled(false);
+        txfEmail.setEnabled(false);
+        txfData.setEnabled(false);
+        txfNome.setEnabled(false);
+        txfSenha.setEnabled(false);
+        
+        cmbFuncao.setEnabled(false);
+    }
+    
+    private void carregarTabelaExemplares(String cpf, String codigoExemplar) {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Título", "Cód. exemp", "Devolução", "Multa"}, 0);
+        
+        for (int i = 0; i < this.users.size(); i++){
+            if (this.users.get(i).getCpf().toLowerCase().equals(cpf)) {
+                for (int j = 0; j < this.users.get(i).getExemplaresEmprestados().size(); j++) {
+                    if (this.users.get(i).getExemplaresEmprestados().get(j).getCodigoExemplar().contains(codigoExemplar)) {
+                        Object[] linha = new Object[]{
+                            this.users.get(i).parseTipoUsuario(),
+                            this.users.get(i).getNome(),
+                            this.users.get(i).getEmail(),
+                            this.users.get(i).getCpf()
+                        };
+
+                        modelo.addRow(linha);
+                    }
+                }
+                
+            }
+        }
+        
+        tabExemplares.setModel(modelo);
+    }
+    
+    private void loadUsers() {
+        File usersFile = new File("users.tmp");
+        if(!usersFile.exists() || usersFile.isDirectory()) { 
+            this.users = new ArrayList();
+            return;
+        }
+        
+        try {
+            FileInputStream fis = new FileInputStream("users.tmp");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Usuario> loadedUsers = (ArrayList<Usuario>) ois.readObject();
+            this.users = loadedUsers;
+            
+            ois.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava carregar usuários: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, String.format("Arquivo de usuários corrompido: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     /**
@@ -26,26 +113,31 @@ public class Emprestimo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
+        txfCodigo = new javax.swing.JTextField();
+        lblCpf = new javax.swing.JLabel();
+        txfCpf = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tabExemplares = new javax.swing.JTable();
+        btnEmprestar = new javax.swing.JButton();
+        btnCPFOk = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        btnDevolver = new javax.swing.JButton();
+        btnCodigoOk = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Código de exemplar");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Empréstimo"));
+        jPanel1.setToolTipText("");
+        jPanel1.setName(""); // NOI18N
 
-        jLabel2.setText("CPF da pessoa");
+        lblCodigo.setText("Código de exemplar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lblCpf.setText("CPF da pessoa");
+
+        tabExemplares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,80 +156,113 @@ public class Emprestimo extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabExemplares);
 
-        jLabel3.setText("Exemplares emprestados");
+        btnEmprestar.setText("Emprestar");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("Empréstimo");
+        btnCPFOk.setText("Ok");
 
-        jButton1.setText("Emprestar");
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Ok");
+        btnDevolver.setText("Devolver");
+
+        btnCodigoOk.setText("Ok");
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
+                    .addComponent(lblCodigo)
+                    .addComponent(lblCpf))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(txfCpf))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addComponent(btnCodigoOk)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCPFOk)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnEmprestar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDevolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPesquisar)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
+                    .addComponent(lblCpf)
+                    .addComponent(txfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCPFOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(lblCodigo)
+                    .addComponent(txfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCodigoOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEmprestar)
+                    .addComponent(btnPesquisar)
+                    .addComponent(btnDevolver)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jScrollPane1.setViewportView(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.resetState();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,17 +300,18 @@ public class Emprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton btnCPFOk;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCodigoOk;
+    private javax.swing.JButton btnDevolver;
+    private javax.swing.JButton btnEmprestar;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblCpf;
+    private javax.swing.JTable tabExemplares;
+    private javax.swing.JTextField txfCodigo;
+    private javax.swing.JTextField txfCpf;
     // End of variables declaration//GEN-END:variables
 }

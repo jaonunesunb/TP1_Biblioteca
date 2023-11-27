@@ -22,6 +22,9 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -34,6 +37,9 @@ import javax.swing.table.DefaultTableModel;
 public class Cadastro extends javax.swing.JFrame {
     
     ArrayList<Usuario> users;
+    
+    String currentUsuarioCPF;
+    int editingUserIndex;
 
     /**
      * Creates new form Cadastro
@@ -41,23 +47,23 @@ public class Cadastro extends javax.swing.JFrame {
     public Cadastro() {
         initComponents();
         
-        // this.users = new ArrayList();
-        loadUsers();
-
-        carregarTabelaUsuarios();
+        this.loadUsers();
+        this.resetState();
         
-        bntSalvarUsuario.setEnabled(false);
-        bntCancelar.setEnabled(false);
-        bntCPFOK.setEnabled(false);
-        bntEmailOK.setEnabled(false);
-        
-        txfCpf.setEnabled(false);
-        txfEmail.setEnabled(false);
-        txfData.setEnabled(false);
-        txfNome.setEnabled(false);
-        txfSenha.setEnabled(false);
-        
-        cmbFuncao.setEnabled(false);
+        tabUsers.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (tabUsers.getSelectedRow() > -1) {
+                    currentUsuarioCPF = tabUsers.getValueAt(tabUsers.getSelectedRow(), 3).toString();
+                    btnEditarUsuario.setEnabled(true);
+                    btnRemoverUsuario.setEnabled(true);
+                } else {
+                    currentUsuarioCPF = null;
+                    btnEditarUsuario.setEnabled(false);
+                    btnRemoverUsuario.setEnabled(false);
+                }
+            }
+        });
     }
     
     private void clearText() {
@@ -69,12 +75,18 @@ public class Cadastro extends javax.swing.JFrame {
     }
     
     private void resetState() {
-        clearText();
+        this.carregarTabelaUsuarios();
+        this.clearText();
+        
+        editingUserIndex = -1;
+        currentUsuarioCPF = null;
         
         bntPesquisar.setEnabled(true);
         btnNovoUsuario.setEnabled(true);
         
         bntSalvarUsuario.setEnabled(false);
+        btnEditarUsuario.setEnabled(false);
+        btnRemoverUsuario.setEnabled(false);
         bntCancelar.setEnabled(false);
         bntCPFOK.setEnabled(false);
         bntEmailOK.setEnabled(false);
@@ -189,6 +201,8 @@ public class Cadastro extends javax.swing.JFrame {
         bntPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabUsers = new javax.swing.JTable();
+        btnEditarUsuario = new javax.swing.JButton();
+        btnRemoverUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro");
@@ -264,7 +278,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(txfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfData, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         pnlFormularioLayout.setVerticalGroup(
             pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,6 +368,20 @@ public class Cadastro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabUsers);
 
+        btnEditarUsuario.setText("Editar");
+        btnEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarUsuarioActionPerformed(evt);
+            }
+        });
+
+        btnRemoverUsuario.setText("Remover");
+        btnRemoverUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,11 +390,15 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnNovoUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntSalvarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bntCancelar)
+                .addGap(8, 8, 8)
+                .addComponent(btnEditarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemoverUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bntCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bntSalvarUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bntPesquisar)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -380,7 +412,9 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(btnNovoUsuario)
                     .addComponent(bntSalvarUsuario)
                     .addComponent(bntCancelar)
-                    .addComponent(bntPesquisar))
+                    .addComponent(bntPesquisar)
+                    .addComponent(btnEditarUsuario)
+                    .addComponent(btnRemoverUsuario))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
         );
@@ -436,7 +470,6 @@ public class Cadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_bntPesquisarActionPerformed
 
     private void bntCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelarActionPerformed
-        this.carregarTabelaUsuarios();
         this.resetState();
     }//GEN-LAST:event_bntCancelarActionPerformed
 
@@ -459,6 +492,18 @@ public class Cadastro extends javax.swing.JFrame {
         
         String nome = this.txfNome.getText();
         String senha = this.txfSenha.getText();
+        
+        // Verificar se cpf ou email já existe
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCpf().equals(cpf) || users.get(i).getEmail().equals(email)) {
+                JOptionPane.showMessageDialog(null, "Email ou CPF já existe", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+        }
+        
+        if (editingUserIndex != -1) {
+            users.remove(editingUserIndex);
+        }
         
         if (funcao.equals("Estudante")) {
             Estudante user = new Estudante(nome, cpf, email, senha, data);
@@ -483,6 +528,70 @@ public class Cadastro extends javax.swing.JFrame {
     private void txfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfDataActionPerformed
+
+    private void btnEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarUsuarioActionPerformed
+        if (currentUsuarioCPF == null) {
+            JOptionPane.showMessageDialog(null, "Nenhum usário selecionado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        // Encontrar usário com CPF
+        Usuario currentUser = null;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCpf().equals(currentUsuarioCPF)) {
+                currentUser = users.get(i);
+                editingUserIndex = i;
+            }
+        }
+        
+        if (currentUser == null) {
+            throw new Error("Usuario nao existe");
+        }
+        
+        this.txfCpf.setText(currentUser.getCpf());
+        this.txfEmail.setText(currentUser.getEmail());
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.txfData.setText(currentUser.getDataDeNascimento().format(formatter));
+        
+        this.txfNome.setText(currentUser.getNome());
+        this.txfSenha.setText(currentUser.getSenha());
+        
+        btnNovoUsuario.setEnabled(false);
+        bntPesquisar.setEnabled(false);
+        
+        bntSalvarUsuario.setEnabled(true);
+        bntCancelar.setEnabled(true);
+        
+        txfCpf.setEnabled(true);
+        txfEmail.setEnabled(true);
+        cmbFuncao.setEnabled(true);
+        txfData.setEnabled(true);
+        txfNome.setEnabled(true);
+        txfSenha.setEnabled(true);
+        
+        txfCpf.requestFocus();
+    }//GEN-LAST:event_btnEditarUsuarioActionPerformed
+
+    private void btnRemoverUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverUsuarioActionPerformed
+        if (currentUsuarioCPF == null) {
+            JOptionPane.showMessageDialog(null, "Nenhum usário selecionado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
+        // Encontrar usário com CPF
+        int userIndex = -1;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getCpf().equals(currentUsuarioCPF)) {
+                userIndex = i;
+            }
+        }
+        
+        users.remove(userIndex);
+
+        this.saveUsers();
+        this.resetState();
+    }//GEN-LAST:event_btnRemoverUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,7 +634,9 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JButton bntEmailOK;
     private javax.swing.JButton bntPesquisar;
     private javax.swing.JButton bntSalvarUsuario;
+    private javax.swing.JButton btnEditarUsuario;
     private javax.swing.JButton btnNovoUsuario;
+    private javax.swing.JButton btnRemoverUsuario;
     private javax.swing.JComboBox<String> cmbFuncao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCpf;

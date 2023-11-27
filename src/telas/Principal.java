@@ -32,7 +32,6 @@ public class Principal extends javax.swing.JFrame {
         mnAcesso = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mniCadastro = new javax.swing.JMenuItem();
-        mniLogin = new javax.swing.JMenuItem();
         mntSair = new javax.swing.JMenuItem();
         mnMateriais = new javax.swing.JMenu();
         mniConsultarMateriais = new javax.swing.JMenuItem();
@@ -56,14 +55,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnAcesso.add(mniCadastro);
-
-        mniLogin.setText("Login");
-        mniLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniLoginActionPerformed(evt);
-            }
-        });
-        mnAcesso.add(mniLogin);
 
         mntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/log_out_icon_197724.png"))); // NOI18N
         mntSair.setText("Sair");
@@ -131,10 +122,6 @@ public class Principal extends javax.swing.JFrame {
         new Cadastro().setVisible(true);
     }//GEN-LAST:event_mniCadastroActionPerformed
 
-    private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
-        new Login().setVisible(true);
-    }//GEN-LAST:event_mniLoginActionPerformed
-
     private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
         new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_mntAddMateriaisActionPerformed
@@ -187,7 +174,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnMateriais;
     private javax.swing.JMenuItem mniCadastro;
     private javax.swing.JMenuItem mniConsultarMateriais;
-    private javax.swing.JMenuItem mniLogin;
     private javax.swing.JMenuItem mntAddMateriais;
     private javax.swing.JMenuItem mntSair;
     // End of variables declaration//GEN-END:variables
