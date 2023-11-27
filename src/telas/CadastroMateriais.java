@@ -27,15 +27,18 @@ import javax.swing.JOptionPane;
 public class CadastroMateriais extends javax.swing.JFrame {
     ArrayList<Material> materials;
     String[] metadata = new String[7];
+    ConsultaMateriais parent;
     
     /**
      * Creates new form Materiais
      */
-    public CadastroMateriais() {
+    public CadastroMateriais(ConsultaMateriais parent) {
         initComponents();
         
         loadMaterials();
         resetState();
+        
+        this.parent = parent;
     }
     
     private void clearText() {
@@ -388,6 +391,11 @@ public class CadastroMateriais extends javax.swing.JFrame {
             this.resetState();
             this.setVisible(false);
             
+            if (this.parent != null) {
+                this.parent.loadMateriais();
+                this.parent.carregarDadosTabelaMaterial();
+            }
+            
             JOptionPane.showMessageDialog(null, "Material cadastrado com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnSalvarMaterialActionPerformed
@@ -428,7 +436,7 @@ public class CadastroMateriais extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroMateriais().setVisible(true);
+                new CadastroMateriais(null).setVisible(true);
             }
         });
     }

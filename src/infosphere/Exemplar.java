@@ -32,7 +32,7 @@ public class Exemplar extends Material implements Serializable {
         this.localizacao = localizacao;
     }
     
-    public Exemplar(String codigo, String codigoExemplar, Material material, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+    public Exemplar(String codigoExemplar, Material material, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
         super(material.getCodigoAcervo(), material.getNome(), material.getAutor(), material.getDescricao(), material.getEdicao(), material.getMetadata(), material.getNumExemplares(), tipoMateriais);
         
         this.codigoExemplar = codigoExemplar;

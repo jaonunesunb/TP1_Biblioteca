@@ -32,9 +32,12 @@ public class CadastroExemplares extends javax.swing.JFrame {
      */
     ArrayList<Material> materials;
     ArrayList<Exemplar> exemplares;
+    Material selectedMaterial;
     
-    public CadastroExemplares() {
+    public CadastroExemplares(Material material) {
         initComponents();
+        
+        this.selectedMaterial = material;
         
         this.loadMaterials();
         this.loadExemplares();
@@ -72,6 +75,9 @@ public class CadastroExemplares extends javax.swing.JFrame {
     }
     
     private int findExemplarIndexByCodigo(String codigoExemplar) {
+        System.out.println("Exemplares");
+        System.out.println(this.exemplares);
+        
         for (int i = 0; i < this.exemplares.size(); i++) {
             if (this.exemplares.get(i).getCodigoExemplar().equals(codigoExemplar)) {
                 return i;
@@ -119,7 +125,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
         try {
             FileOutputStream fos = new FileOutputStream("exemplares.tmp");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this.materials);
+            oos.writeObject(this.exemplares);
             oos.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar exemplares: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -296,6 +302,11 @@ public class CadastroExemplares extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
       
     private void btnSalvarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarExemplarActionPerformed
+        if (this.selectedMaterial == null) {
+            JOptionPane.showMessageDialog(null, "Nenhum material selecionado!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        
         if (txtCodExemp.getText().equals("" ) 
             || txfReimpr.getText().equals("") 
             || txfRenovacoes.getText().equals("")) {
@@ -304,9 +315,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
         }
         else {
              // get de dados
-            String acervo = this.txtCodExemp.getText();
-            
-            int materialIndex = this.findMaterialIndexByAcervo(acervo);
+            int materialIndex = this.findMaterialIndexByAcervo(this.selectedMaterial.getCodigoAcervo());
             if (materialIndex == -1) {
                 System.out.printf("Materiais: %s", this.materials);
                 JOptionPane.showMessageDialog(null, "Código de acervo não existe!", "Mensagem", JOptionPane.PLAIN_MESSAGE);
@@ -341,7 +350,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
             }
     
             // Criar o exemplar com os argumentos corrigidos
-            Exemplar exemplar = new Exemplar(acervo, codigoExemplar, materialSelecionado, valorMulta, descricao, edicao, reimpr, metadata, numExemplares, localizacao, tipoMateriais);
+            Exemplar exemplar = new Exemplar(codigoExemplar, materialSelecionado, valorMulta, descricao, edicao, reimpr, metadata, numExemplares, localizacao, tipoMateriais);
 
             // Adicionar o exemplar ao material
             materialSelecionado.adicionarExemplar(exemplar);
@@ -401,7 +410,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroExemplares().setVisible(true);
+                new CadastroExemplares(null).setVisible(true);
             }
         });
     }

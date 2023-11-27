@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +28,8 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     
     ArrayList<Material> materiais;
     ArrayList<Exemplar> exemplares;
+    
+    Material selectedMaterial;
 
     /**
      * Creates new form ConsultaMateriais
@@ -34,8 +38,9 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         initComponents();
         
         this.loadMateriais();
-        System.out.println(materiais);
         // loadExemplares();
+        
+        selectedMaterial = null;
         
         this.carregarDadosTabelaMaterial(); 
         
@@ -51,6 +56,38 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         txfAutor.setEnabled(false);
         txaDescricao.setEnabled(false);
         cmbTipoMaterial.setEnabled(false);
+        
+        tblMateriais.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent event) {
+                if (tblMateriais.getSelectedRow() > -1) {
+                    String codigoAcervo = tblMateriais.getValueAt(tblMateriais.getSelectedRow(), 0).toString();
+                    int materialIndex = findMaterialIndexByAcervo(codigoAcervo);
+                    selectedMaterial = materiais.get(materialIndex);
+        
+                    txfCodAcervo.setText(selectedMaterial.getCodigoAcervo());
+                    txfTitulo.setText(selectedMaterial.getNome());
+                    txfAutor.setText(selectedMaterial.getAutor());
+                    txaDescricao.setText(selectedMaterial.getDescricao());
+                    cmbTipoMaterial.setSelectedItem(selectedMaterial.getTipoMateriais());
+
+                    btnNovoExemplar.setEnabled(true);
+                    btnEditarExemplar.setEnabled(false);
+                    btnDeletarExemplar.setEnabled(false);
+                    btnAcessarMaterial.setEnabled(true);
+
+                    txfCodAcervo.setEnabled(false);
+                    txfTitulo.setEnabled(false);
+                    txfAutor.setEnabled(false);
+                    txaDescricao.setEnabled(false);
+                    cmbTipoMaterial.setEnabled(false);
+
+                    btnExcluirMaterial.setEnabled(true);
+                } else {
+                    selectedMaterial = null;
+                }
+            }
+        });
     }
 
     /**
@@ -99,17 +136,17 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
         tblMateriais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Edição", "Titulo"
+                "Cód. Acervo", "Edição", "Titulo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -327,36 +364,32 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jScrollPane3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(45, 45, 45)
-                                        .addComponent(btnNovoMaterial)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnExcluirMaterial))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(278, 278, 278)
-                                        .addComponent(btnSairMateriais)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap(36, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnNovoMaterial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluirMaterial))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(btnSairMateriais))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addComponent(btnNovoExemplar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditarExemplar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDeletarExemplar)
-                        .addGap(54, 54, 54))))
+                        .addGap(18, 18, 18)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,7 +416,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void loadMateriais() {
+    protected void loadMateriais() {
         File materiaisFile = new File("materials.tmp");
         if(!materiaisFile.exists() || materiaisFile.isDirectory()) { 
             System.out.println("Não existem materiais ainda.");
@@ -411,7 +444,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         }
     }
  
-    private void loadExemplares() {
+    protected void loadExemplares() {
         File exemplaresFile = new File("exemplares.tmp");
         if(!exemplaresFile.exists() || exemplaresFile.isDirectory()) { 
             this.exemplares = new ArrayList();
@@ -432,12 +465,13 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         }
     }
     
-    private void carregarDadosTabelaMaterial() {
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edição", "Título"}, 0);
+    protected void carregarDadosTabelaMaterial() {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Acervo", "Edição", "Título"}, 0);
            
         System.out.println(materiais);
         for (int i = 0; i < this.materiais.size(); i++) {
             Object linha[] = new Object[] {
+                this.materiais.get(i).getCodigoAcervo(),
                 this.materiais.get(i).getEdicao(),
                 this.materiais.get(i).getNome(),
             };
@@ -471,13 +505,14 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     }
 
     private void carregarTabelaMateriaisFiltrada(String titulo, String codAcervo) {
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edicao", "Título"}, 0);
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Acervo", "Edição", "Título"}, 0);
         
         for (int i = 0; i < this.materiais.size(); i++){
             if (this.materiais.get(i).getNome().toLowerCase().contains(titulo.toLowerCase())
                     || this.materiais.get(i).getCodigoAcervo().contains(codAcervo)
             ) {
                 Object[] linha = new Object[]{
+                    this.materiais.get(i).getCodigoAcervo(),
                     this.materiais.get(i).getEdicao(),
                     this.materiais.get(i).getNome()
                 };
@@ -488,6 +523,16 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         }
         
         tblMateriais.setModel(modelo);
+    }
+    
+    private int findMaterialIndexByAcervo(String acervo) {
+        for (int i = 0; i < this.materiais.size(); i++) {
+            if (this.materiais.get(i).getCodigoAcervo().equals(acervo)) {
+                return i;
+            }
+        }
+        
+        return -1;
     }
     
     private void btnSearchByTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByTituloActionPerformed
@@ -501,8 +546,9 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchByCodAcervoActionPerformed
 
     private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
-        new CadastroMateriais().setVisible(true);
+        new CadastroMateriais(this).setVisible(true);
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
+    
     public Material getMaterialByAcervo(String cod) {
         for (int i = 0; i < this.materiais.size(); i++){
             if (this.materiais.get(i).getCodigoAcervo().contains(cod)) {
@@ -513,31 +559,12 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     }
     
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
-        CadastroExemplares cadastroExemplares = new CadastroExemplares();
+        CadastroExemplares cadastroExemplares = new CadastroExemplares(selectedMaterial);
         cadastroExemplares.setVisible(true);
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void tblMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriaisMouseClicked
-        int i = tblMateriais.getSelectedRow();
         
-        txfCodAcervo.setText(this.materiais.get(i).getCodigoAcervo());
-        txfTitulo.setText(this.materiais.get(i).getNome());
-        txfAutor.setText(this.materiais.get(i).getAutor());
-        txaDescricao.setText(this.materiais.get(i).getDescricao());
-        cmbTipoMaterial.setSelectedItem(this.materiais.get(i).getTipoMateriais());
-        
-        btnNovoExemplar.setEnabled(true);
-        btnEditarExemplar.setEnabled(false);
-        btnDeletarExemplar.setEnabled(false);
-        btnAcessarMaterial.setEnabled(true);
-        
-        txfCodAcervo.setEnabled(false);
-        txfTitulo.setEnabled(false);
-        txfAutor.setEnabled(false);
-        txaDescricao.setEnabled(false);
-        cmbTipoMaterial.setEnabled(false);
-        
-        btnExcluirMaterial.setEnabled(true);
         
     }//GEN-LAST:event_tblMateriaisMouseClicked
 
