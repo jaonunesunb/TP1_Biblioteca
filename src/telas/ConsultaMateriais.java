@@ -32,7 +32,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         loadMateriais();
         loadExemplares();
         carregarDadosTabelaMaterial(); 
-        btnNovoExemplar.setEnabled(true);
+        btnNovoExemplar.setEnabled(false);
         btnEditarExemplar.setEnabled(false);
         btnDeletarExemplar.setEnabled(false);
         btnAcessarMaterial.setEnabled(false);
@@ -302,6 +302,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         btnDeletarExemplar.setText("Deletar exemplar");
 
         btnEditarExemplar.setText("Editar exemplar");
+        btnEditarExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarExemplarActionPerformed(evt);
+            }
+        });
 
         btnSairMateriais.setText("Sair");
         btnSairMateriais.addActionListener(new java.awt.event.ActionListener() {
@@ -318,31 +323,33 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovoExemplar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnEditarExemplar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDeletarExemplar)
-                                .addGap(16, 16, 16))))
+                                .addGap(28, 28, 28)
+                                .addComponent(jScrollPane3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
+                                        .addComponent(btnNovoMaterial)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnExcluirMaterial))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(278, 278, 278)
+                                        .addComponent(btnSairMateriais)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(btnNovoMaterial)
-                                .addGap(124, 124, 124)
-                                .addComponent(btnExcluirMaterial))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(278, 278, 278)
-                                .addComponent(btnSairMateriais)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(btnNovoExemplar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditarExemplar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDeletarExemplar)
+                        .addGap(54, 54, 54))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,11 +361,12 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                     .addComponent(btnExcluirMaterial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeletarExemplar)
+                    .addComponent(btnNovoExemplar)
                     .addComponent(btnEditarExemplar)
-                    .addComponent(btnNovoExemplar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnDeletarExemplar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSairMateriais)
@@ -524,10 +532,15 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
     private void tblExemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExemplaresMouseClicked
         int i = tblExemplares.getSelectedRow();
-        
-      
+        btnEditarExemplar.setEnabled(true);
         btnExcluirMaterial.setEnabled(true);
+        //get(i).setId(id);
     }//GEN-LAST:event_tblExemplaresMouseClicked
+
+    private void btnEditarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarExemplarActionPerformed
+        int i = tblExemplares.getSelectedRow();
+        
+    }//GEN-LAST:event_btnEditarExemplarActionPerformed
 
     /**
      * @param args the command line arguments
