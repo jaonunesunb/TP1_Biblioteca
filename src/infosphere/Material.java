@@ -4,11 +4,13 @@
  */
 package infosphere;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pegad
  */
-public class Material {
+public class Material implements Serializable {
     protected String codigoAcervo;
     protected String nome;
     protected String autor; 

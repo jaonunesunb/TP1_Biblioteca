@@ -5,12 +5,13 @@
 package infosphere;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  *
  * @author Pegad
  */
-public class Exemplar extends Material {
+public class Exemplar extends Material implements Serializable {
     protected String codigoExemplar;
     protected int renovacoes;
     protected boolean emprestado;
