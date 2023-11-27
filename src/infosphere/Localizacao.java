@@ -9,8 +9,8 @@ package infosphere;
  * @author Pegad
  */
 public enum Localizacao {
-    acervoGeral,
-    obrasRaras,
-    espacoSom,
-    multiMeios
+    Emprestado,
+    Processamento,
+    Disponível,
+    Restauro
 }

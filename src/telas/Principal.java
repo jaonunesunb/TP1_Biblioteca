@@ -122,6 +122,10 @@ public class Principal extends javax.swing.JFrame {
         new Cadastro().setVisible(true);
     }//GEN-LAST:event_mniCadastroActionPerformed
 
+    private void mniLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLoginActionPerformed
+        //new Login().setVisible(true);
+    }//GEN-LAST:event_mniLoginActionPerformed
+
     private void mntAddMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mntAddMateriaisActionPerformed
         new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_mntAddMateriaisActionPerformed
