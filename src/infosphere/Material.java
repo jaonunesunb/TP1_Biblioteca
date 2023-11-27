@@ -4,7 +4,9 @@
  */
 package infosphere;
 
+import java.util.List;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,9 +24,9 @@ public class Material implements Serializable {
     protected int numExemplares;
   
     protected TipoMateriais tipoMateriais;
-    private Exemplar[] exemplaresMaterial;
+    private List<Exemplar> exemplaresMaterial;
 
-    public Material(String codigoAcervo, String nome, String autor, String descricao, String edicao, String[] metadata, int numExemplares, TipoMateriais tipoMateriais, Exemplar[] exemplaresMaterial) {
+    public Material(String codigoAcervo, String nome, String autor, String descricao, String edicao, String[] metadata, int numExemplares, TipoMateriais tipoMateriais) {
         this.codigoAcervo = codigoAcervo;
         this.nome = nome;
         this.autor = autor;
@@ -32,28 +34,12 @@ public class Material implements Serializable {
         this.edicao = edicao;
         this.metadata = metadata;
         this.numExemplares = numExemplares;
-        this.exemplaresMaterial = exemplaresMaterial;
-    }
-    
-      public Material(String codigoAcervo, String nome, String autor, String descricao, String edicao, String[] metadata, int numExemplares, TipoMateriais tipoMateriais) {
-        this.codigoAcervo = codigoAcervo;
-        this.nome = nome;
-        this.autor = autor;
-        this.descricao = descricao;
-        this.metadata = metadata;
-        this.numExemplares = numExemplares;
-        this.tipoMateriais = tipoMateriais;
+        this.exemplaresMaterial = new ArrayList<>();
     }
 
     public String getCodigoAcervo() {
         return codigoAcervo;
     }
-
-    public Exemplar[] getExemplaresMaterial() {
-        return exemplaresMaterial;
-    }
-    
-    
 
     public void setCodigoAcervo(String codigoAcervo) {
         this.codigoAcervo = codigoAcervo;
@@ -61,6 +47,18 @@ public class Material implements Serializable {
 
     public String getNome() {
         return nome;
+    }
+    public void adicionarExemplar(Exemplar exemplar) {
+        exemplaresMaterial.add(exemplar);
+    }
+
+    // Método para remover um exemplar do material
+    public void removerExemplar(Exemplar exemplar) {
+        exemplaresMaterial.remove(exemplar);
+    }
+
+    public List<Exemplar> getExemplaresMaterial() {
+        return exemplaresMaterial;
     }
     
     public void setNome(String nome) {
@@ -104,6 +102,10 @@ public class Material implements Serializable {
 
     public int getNumExemplares() {
         return numExemplares;
+    }
+    
+    public TipoMateriais getTipoMateriais() {
+        return tipoMateriais;
     }
 
     public void setNumExemplares(int numExemplares) {

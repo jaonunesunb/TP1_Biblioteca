@@ -27,7 +27,25 @@ public class Exemplar extends Material {
         this.reservado = false;
         this.dataDevolucao = dataDevolucao;
     }
+    public Exemplar(String codigo, String codigoExemplar, Material material, Date dataDevolucao, Double valorMulta, String descricao, String edicao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+    super(material.getCodigoAcervo(), material.getNome(), material.getAutor(), material.getDescricao(), material.getEdicao(), material.getMetadata(), material.getNumExemplares(), tipoMateriais);
+    this.codigoExemplar = codigoExemplar;
+    this.renovacoes = 0;
+    this.valorMulta = 0.0;
+    this.emprestado = false;
+    this.reservado = false;
+    this.dataDevolucao = dataDevolucao;
+}
 
+    public Exemplar(String codigo, String codigoExemplar,String nome, String autor, Double valorMulta, String descricao, String edicao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+        super(codigo, nome, autor, descricao, edicao, metadata, numExemplares, tipoMateriais);
+        this.codigoExemplar = codigoExemplar;
+        this.renovacoes = 0;
+        this.valorMulta = 0.0;
+        this.emprestado = false;
+        this.reservado = false;
+        this.dataDevolucao = dataDevolucao;
+    }
     public String getCodigoExemplar() {
         return codigoExemplar;
     }

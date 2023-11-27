@@ -4,20 +4,31 @@
  */
 package telas;
 
+import infosphere.Exemplar;
+import infosphere.Localizacao;
 import infosphere.Material;
 import infosphere.TipoMateriais;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import static telas.CadastroMateriais.material;
 
 /**
  *
  * @author Pegad
  */
-public class exemplares extends javax.swing.JFrame {
+public class CadastroExemplares extends javax.swing.JFrame {
 
     /**
      * Creates new form exemplares
      */
-    public exemplares() {
+    private ConsultaMateriais consultaMateriais;
+    public CadastroExemplares() {
         initComponents();
     }
 
@@ -45,10 +56,10 @@ public class exemplares extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSalvarExemplar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbLocalExemplar = new javax.swing.JComboBox<>();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -99,10 +110,10 @@ public class exemplares extends javax.swing.JFrame {
 
         jButton3.setText("Editar");
 
-        jButton4.setText("Salvar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarExemplar.setText("Salvar");
+        btnSalvarExemplar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSalvarExemplarActionPerformed(evt);
             }
         });
 
@@ -110,7 +121,7 @@ public class exemplares extends javax.swing.JFrame {
 
         jButton6.setText("Sair");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emprestado", "Processamento", "Disponível", "Restauro" }));
+        cmbLocalExemplar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emprestado", "Processamento", "Disponível", "Restauro" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +132,7 @@ public class exemplares extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btnSalvarExemplar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,7 +152,7 @@ public class exemplares extends javax.swing.JFrame {
                         .addComponent(txfReimpr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +178,7 @@ public class exemplares extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLocalExemplar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -186,7 +197,7 @@ public class exemplares extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton4)
+                    .addComponent(btnSalvarExemplar)
                     .addComponent(jButton5)
                     .addComponent(jButton3)
                     .addComponent(jButton2))
@@ -203,9 +214,21 @@ public class exemplares extends javax.swing.JFrame {
     private void txfReimprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfReimprActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txfReimprActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         if (txtCodExemp.getText().equals("" ) 
+    private void saveExemplares() {
+        try {
+            FileOutputStream fos = new FileOutputStream("exemplares.tmp");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(material);
+            oos.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar exemplar: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(e);
+        }
+    }
+    
+    private void btnSalvarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarExemplarActionPerformed
+        consultaMateriais = new ConsultaMateriais();  
+        if (txtCodExemp.getText().equals("" ) 
             || txfReimpr.getText().equals("") 
             || txfRenovacoes.getText().equals("")) {
 
@@ -214,33 +237,45 @@ public class exemplares extends javax.swing.JFrame {
         else {
              // get de dados
             String acervo = this.txtCodExemp.getText();
-            String nome = this.txfReimpr.getText();
-            String tipoSelecionado = String.valueOf(this.cmbTipoMaterial.getSelectedItem());
-            String descricao = this.txaDescricaoMaterial.getText();
-            String tituloAlternativo = this.txtNomeMaterial.getText();
-            String tipoSelecionado = String.valueOf(this.cmbTipoMaterial.getSelectedItem());
-            TipoMateriais tipo = TipoMateriais.valueOf(tipoSelecionado);
-            String autores = this.txtAutor.getText();
-            String anoPublicacao = this.txtAnoPublicacao.getText();
-            String  idioma = this.txtIdioma.getText();
-            String editora = this.txtEditora.getText();
-            String edicao = this.txtEdition.getText();
-            String CDU = this.txtCDU.getText();
-            String dimencoes = this.txtDimensions.getText();
-            String assuntos = this.txtAssuntos.getText();
+            Material materialSelecionado = consultaMateriais.getMaterialByAcervo(acervo);
+
+            String reimpr = this.txfReimpr.getText();
+            String localExemplar = String.valueOf(this.cmbLocalExemplar.getSelectedItem());
+            String descricao = materialSelecionado.getDescricao();
+            String edicao = materialSelecionado.getEdicao();
+            String[] metadata = materialSelecionado.getMetadata();
+            int numExemplares = materialSelecionado.getNumExemplares();
+            TipoMateriais tipoMateriais = materialSelecionado.getTipoMateriais();
+           
+            Double valorMulta = 0.0;
             
-            metadata[0] = tituloAlternativo;
-            metadata[1] = anoPublicacao;
-            metadata[2] = idioma;
-            metadata[3] = editora;
-            metadata[4] = CDU;
-            metadata[5] = dimencoes;
-            metadata[6] = assuntos;
-            new Material(acervo, nome, autores, descricao, edicao, metadata, 0, tipo);
-            saveMateriais();
-            resetState();
-        }       // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+            if(localExemplar.equals("Disponível")) {
+                Boolean disponivel = true;
+            }
+            else {
+               Boolean disponivel = false; 
+            }
+
+            // Obter a data de devolução convertendo a String para um objeto Date
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            String dataString = "01/01/2024"; // Data de exemplo
+            Date dataDeDevolucao = null;
+            try {
+                dataDeDevolucao = df.parse(dataString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            Localizacao localizacao = Localizacao.valueOf(localExemplar.toUpperCase());
+    
+            // Criar o exemplar com os argumentos corrigidos
+            Exemplar exemplar = new Exemplar(acervo, reimpr, materialSelecionado, dataDeDevolucao, valorMulta, descricao, edicao, metadata, numExemplares, localizacao, tipoMateriais);
+
+        // Adicionar o exemplar ao material
+        materialSelecionado.adicionarExemplar(exemplar);
+            saveExemplares();
+        }     
+    }//GEN-LAST:event_btnSalvarExemplarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,34 +294,37 @@ public class exemplares extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(exemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroExemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(exemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroExemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(exemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroExemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(exemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroExemplares.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new exemplares().setVisible(true);
+                new CadastroExemplares().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvarExemplar;
+    private javax.swing.JComboBox<String> cmbLocalExemplar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -28,6 +28,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     public ConsultaMateriais() {
         initComponents();
         loadMateriais();
+        loadExemplares();
         carregarDadosTabelaMaterial(); 
     }
 
@@ -66,7 +67,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         tblExemplares = new javax.swing.JTable();
         btnNovoMaterial = new javax.swing.JButton();
         btnExcluirMaterial = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnNovoExemplar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -266,7 +267,12 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
         btnExcluirMaterial.setText("Excluir material");
 
-        jButton1.setText("Novo exemplar");
+        btnNovoExemplar.setText("Novo exemplar");
+        btnNovoExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoExemplarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Deletar exemplar");
 
@@ -284,7 +290,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                         .addComponent(jScrollPane3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1)
+                        .addComponent(btnNovoExemplar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -314,7 +320,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(btnNovoExemplar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
@@ -410,6 +416,19 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
         new CadastroMateriais().setVisible(true);
     }//GEN-LAST:event_btnNovoMaterialActionPerformed
+    public Material getMaterialByAcervo(String cod) {
+        for (int i = 0; i < this.material.size(); i++){
+            if (this.material.get(i).getCodigoAcervo().contains(cod)) {
+                return this.material.get(i);
+            }
+        }
+          return null;
+    }
+    
+    private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
+        CadastroExemplares cadastroExemplares = new CadastroExemplares();
+        cadastroExemplares.setVisible(true);
+    }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,11 +468,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessarMaterial;
     private javax.swing.JButton btnExcluirMaterial;
+    private javax.swing.JButton btnNovoExemplar;
     private javax.swing.JButton btnNovoMaterial;
     private javax.swing.JButton btnSearchByCodAcervo;
     private javax.swing.JButton btnSearchByTitulo;
     private javax.swing.JComboBox<String> cmbTipoMaterial;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
