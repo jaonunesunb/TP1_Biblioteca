@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,11 +26,24 @@ public class ConsultaMateriais extends javax.swing.JFrame {
      */
     ArrayList<Material> material;
     ArrayList<Exemplar> exemplar;
+    
     public ConsultaMateriais() {
         initComponents();
         loadMateriais();
         loadExemplares();
         carregarDadosTabelaMaterial(); 
+        btnNovoExemplar.setEnabled(true);
+        btnEditarExemplar.setEnabled(false);
+        btnDeletarExemplar.setEnabled(false);
+        btnAcessarMaterial.setEnabled(false);
+        btnExcluirMaterial.setEnabled(false);
+        
+        
+        txfCodAcervo.setEnabled(false);
+        txfTitulo.setEnabled(false);
+        txfAutor.setEnabled(false);
+        txaDescricao.setEnabled(false);
+        cmbTipoMaterial.setEnabled(false);
     }
 
     /**
@@ -68,8 +82,9 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         btnNovoMaterial = new javax.swing.JButton();
         btnExcluirMaterial = new javax.swing.JButton();
         btnNovoExemplar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDeletarExemplar = new javax.swing.JButton();
+        btnEditarExemplar = new javax.swing.JButton();
+        btnSairMateriais = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +107,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tblMateriais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMateriaisMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblMateriais);
@@ -245,7 +265,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cód.exemp", "Edição", "Disponível", "Localização", "Núm. renov"
+                "Cód.exemp", "Reimpressão", "Disponível", "Localização", "Núm. renov"
             }
         ) {
             Class[] types = new Class [] {
@@ -254,6 +274,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tblExemplares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblExemplaresMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tblExemplares);
@@ -274,9 +299,16 @@ public class ConsultaMateriais extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Deletar exemplar");
+        btnDeletarExemplar.setText("Deletar exemplar");
 
-        jButton3.setText("Editar exemplar");
+        btnEditarExemplar.setText("Editar exemplar");
+
+        btnSairMateriais.setText("Sair");
+        btnSairMateriais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairMateriaisActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,24 +318,30 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnNovoExemplar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(16, 16, 16))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNovoExemplar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEditarExemplar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDeletarExemplar)
+                                .addGap(16, 16, 16))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(btnNovoMaterial)
-                        .addGap(124, 124, 124)
-                        .addComponent(btnExcluirMaterial))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(btnNovoMaterial)
+                                .addGap(124, 124, 124)
+                                .addComponent(btnExcluirMaterial))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(278, 278, 278)
+                                .addComponent(btnSairMateriais)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -316,14 +354,15 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                     .addComponent(btnExcluirMaterial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(btnDeletarExemplar)
+                    .addComponent(btnEditarExemplar)
                     .addComponent(btnNovoExemplar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSairMateriais)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -381,9 +420,33 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 modelo.addRow(linha);
                         }
             tblMateriais.setModel(modelo);
+            carregarDadosTabelaExemplares();
         }
     }
     
+    public void carregarDadosTabelaExemplares() {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Exemplar", 
+                "Reimpressão", "Disponível", "Localização", "Núm. renov"}, 0);
+
+        // Itera sobre os materiais para acessar os exemplares de cada material
+        for (Material mat : this.material) {
+            List<Exemplar> exemplares = mat.getExemplaresMaterial();
+            if (exemplares.size() >= 1) {
+                for (Exemplar ex : exemplares) {
+                    Object linha[] = new Object[] {
+                        ex.getCodigoExemplar(),
+                        ex.getReimpr(),
+                        ex.isEmprestado(),
+                        ex.getLocalizacao(),
+                        ex.getRenovacoes(),
+                    };
+                    modelo.addRow(linha);
+                }
+            }
+        }
+        tblExemplares.setModel(modelo);
+    }
+
     private void carregarTabelaMateriaisFiltrada(String titulo, String codAcervo) {
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edicao", "Título"}, 0);
         
@@ -397,6 +460,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 };
 
                 modelo.addRow(linha);
+                carregarDadosTabelaExemplares();
             }
         }
         
@@ -429,6 +493,41 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         CadastroExemplares cadastroExemplares = new CadastroExemplares();
         cadastroExemplares.setVisible(true);
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
+
+    private void tblMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriaisMouseClicked
+        int i = tblMateriais.getSelectedRow();
+        
+        txfCodAcervo.setText(this.material.get(i).getCodigoAcervo());
+        txfTitulo.setText(this.material.get(i).getNome());
+        txfAutor.setText(this.material.get(i).getAutor());
+        txaDescricao.setText(this.material.get(i).getDescricao());
+        cmbTipoMaterial.setSelectedItem(this.material.get(i).getTipoMateriais());
+        
+        btnNovoExemplar.setEnabled(true);
+        btnEditarExemplar.setEnabled(false);
+        btnDeletarExemplar.setEnabled(false);
+        btnAcessarMaterial.setEnabled(true);
+        
+        txfCodAcervo.setEnabled(false);
+        txfTitulo.setEnabled(false);
+        txfAutor.setEnabled(false);
+        txaDescricao.setEnabled(false);
+        cmbTipoMaterial.setEnabled(false);
+        
+        btnExcluirMaterial.setEnabled(true);
+        
+    }//GEN-LAST:event_tblMateriaisMouseClicked
+
+    private void btnSairMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairMateriaisActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairMateriaisActionPerformed
+
+    private void tblExemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExemplaresMouseClicked
+        int i = tblExemplares.getSelectedRow();
+        
+      
+        btnExcluirMaterial.setEnabled(true);
+    }//GEN-LAST:event_tblExemplaresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -467,14 +566,15 @@ public class ConsultaMateriais extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessarMaterial;
+    private javax.swing.JButton btnDeletarExemplar;
+    private javax.swing.JButton btnEditarExemplar;
     private javax.swing.JButton btnExcluirMaterial;
     private javax.swing.JButton btnNovoExemplar;
     private javax.swing.JButton btnNovoMaterial;
+    private javax.swing.JButton btnSairMateriais;
     private javax.swing.JButton btnSearchByCodAcervo;
     private javax.swing.JButton btnSearchByTitulo;
     private javax.swing.JComboBox<String> cmbTipoMaterial;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
