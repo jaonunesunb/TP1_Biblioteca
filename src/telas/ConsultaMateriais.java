@@ -4,6 +4,7 @@
  */
 package telas;
 
+import infosphere.Exemplar;
 import infosphere.Material;
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +24,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
      * Creates new form ConsultaMateriais
      */
     ArrayList<Material> material;
-    
+    ArrayList<Exemplar> exemplar;
     public ConsultaMateriais() {
         initComponents();
         loadMateriais();
@@ -193,9 +194,9 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txfAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfCodAcervo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cmbTipoMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,7 +325,7 @@ public class ConsultaMateriais extends javax.swing.JFrame {
  private void loadMateriais() {
         File materiaisFile = new File("materiais.tmp");
         if(!materiaisFile.exists() || materiaisFile.isDirectory()) { 
-            this.material = new ArrayList();
+            this.material = new ArrayList<>();
             return;
         }
         
@@ -341,11 +342,32 @@ public class ConsultaMateriais extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, String.format("Arquivo de materiais corrompido: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
         }
     }
+ 
+  private void loadExemplares() {
+        File exemplaresFile = new File("exemplares.tmp");
+        if(!exemplaresFile.exists() || exemplaresFile.isDirectory()) { 
+            this.exemplar = new ArrayList<>();
+            return;
+        }
+        
+        try {
+            FileInputStream fis = new FileInputStream("exemplares.tmp");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            ArrayList<Exemplar> loadedMateriais = (ArrayList<Exemplar>) ois.readObject();
+            this.exemplar = loadedMateriais;
+            
+            ois.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava carregar exemplares: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, String.format("Arquivo de exemplares corrompido: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
     
     public void carregarDadosTabelaMaterial() {
            DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edição", 
                 "Título"}, 0);
-
+           if (this.material.size() >= 1) {
             for (int i = 0; i < this.material.size(); i++) {
                 Object linha[] = new Object[] {this.material.get(i).getEdicao(),
                                                this.material.get(i).getNome(),
@@ -354,6 +376,8 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                         }
             tblMateriais.setModel(modelo);
         }
+    }
+    
     private void carregarTabelaMateriaisFiltrada(String titulo, String codAcervo) {
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Edicao", "Título"}, 0);
         

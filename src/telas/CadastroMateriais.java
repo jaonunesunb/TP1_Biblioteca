@@ -436,15 +436,18 @@ public class CadastroMateriais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirMaterialActionPerformed
 
     private void btnSalvarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMaterialActionPerformed
-        if (txtCodAcervo.getText().equals("" ) || txtNomeMaterial.getText().equals("") || 
-                txaDescricaoMaterial.getText().equals("") || txtEdition.getText().equals("") || 
-                txtEditora.getText().equals("") || 
-                 txtAutor.getText().equals("")|| 
-                 txtAnoPublicacao.getText().equals("") || 
-                 txtCDU.getText().equals("") || 
-                 txtIdioma.getText().equals("") || txtNumPaginas.getText().equals("") 
-                || txtDimensions.getText().equals("") 
-                || txtAssuntos.getText().equals("")) {
+        if (txtCodAcervo.getText().equals("" ) 
+            || txtNomeMaterial.getText().equals("") 
+            || txaDescricaoMaterial.getText().equals("") 
+            || txtEdition.getText().equals("") 
+            || txtEditora.getText().equals("") 
+            || txtAutor.getText().equals("")
+            || txtAnoPublicacao.getText().equals("") 
+            || txtCDU.getText().equals("") 
+            || txtIdioma.getText().equals("") 
+            || txtNumPaginas.getText().equals("") 
+            || txtDimensions.getText().equals("") 
+            || txtAssuntos.getText().equals("")) {
 
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -464,7 +467,6 @@ public class CadastroMateriais extends javax.swing.JFrame {
             String CDU = this.txtCDU.getText();
             String dimencoes = this.txtDimensions.getText();
             String assuntos = this.txtAssuntos.getText();
-            
             
             metadata[0] = tituloAlternativo;
             metadata[1] = anoPublicacao;

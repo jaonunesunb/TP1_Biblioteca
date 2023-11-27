@@ -18,9 +18,9 @@ public class Exemplar extends Material {
     protected Date dataDevolucao;
     protected Double valorMulta;
 
-    public Exemplar(String codigo, String nome, String autor, Date dataDevolucao, Double valorMulta, String descricao, String edicao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
+    public Exemplar(String codigo, String codigoExemplar,String nome, String autor, Date dataDevolucao, Double valorMulta, String descricao, String edicao, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
         super(codigo, nome, autor, descricao, edicao, metadata, numExemplares, tipoMateriais);
-        this.codigoExemplar = codigo;
+        this.codigoExemplar = codigoExemplar;
         this.renovacoes = 0;
         this.valorMulta = 0.0;
         this.emprestado = false;
