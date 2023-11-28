@@ -32,6 +32,8 @@ public class Principal extends javax.swing.JFrame {
         mnAcesso = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mniCadastro = new javax.swing.JMenuItem();
+        mniEmprestimo = new javax.swing.JMenuItem();
+        mniDevolucao = new javax.swing.JMenuItem();
         mntSair = new javax.swing.JMenuItem();
         mnMateriais = new javax.swing.JMenu();
         mniConsultarMateriais = new javax.swing.JMenuItem();
@@ -54,6 +56,22 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         mnAcesso.add(mniCadastro);
+
+        mniEmprestimo.setText("Pegar Emprestado");
+        mniEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEmprestimoActionPerformed(evt);
+            }
+        });
+        mnAcesso.add(mniEmprestimo);
+
+        mniDevolucao.setText("Devolver");
+        mniDevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDevolucaoActionPerformed(evt);
+            }
+        });
+        mnAcesso.add(mniDevolucao);
 
         mntSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/log_out_icon_197724.png"))); // NOI18N
         mntSair.setText("Sair");
@@ -121,6 +139,14 @@ public class Principal extends javax.swing.JFrame {
        new ConsultaMateriais().setVisible(true);
     }//GEN-LAST:event_mniConsultarMateriaisActionPerformed
 
+    private void mniEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEmprestimoActionPerformed
+        new Emprestimo().setVisible(true);
+    }//GEN-LAST:event_mniEmprestimoActionPerformed
+
+    private void mniDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDevolucaoActionPerformed
+        new Devolucao().setVisible(true);
+    }//GEN-LAST:event_mniDevolucaoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,6 +191,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu mnMateriais;
     private javax.swing.JMenuItem mniCadastro;
     private javax.swing.JMenuItem mniConsultarMateriais;
+    private javax.swing.JMenuItem mniDevolucao;
+    private javax.swing.JMenuItem mniEmprestimo;
     private javax.swing.JMenuItem mntSair;
     // End of variables declaration//GEN-END:variables
 }

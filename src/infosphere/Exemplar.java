@@ -5,6 +5,7 @@
 package infosphere;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Exemplar extends Material implements Serializable {
     
     protected boolean emprestado;
     protected boolean reservado;
+    
+    protected LocalDate dataEmprestimo;
     
     protected Double valorMulta;
     protected String reimpr;
@@ -30,6 +33,7 @@ public class Exemplar extends Material implements Serializable {
         this.emprestado = false;
         this.reservado = false;
         this.localizacao = localizacao;
+        
     }
     
     public Exemplar(String codigoExemplar, Material material, Double valorMulta, String descricao, String edicao, String reimpr, String[] metadata, int numExemplares, Localizacao localizacao, TipoMateriais tipoMateriais) {
@@ -41,6 +45,7 @@ public class Exemplar extends Material implements Serializable {
         this.valorMulta = 0.0;
         this.emprestado = false;
         this.reservado = false;
+        this.localizacao = Localizacao.DISPONIVEL;
     }
     
     public String getCodigoExemplar() {
@@ -68,7 +73,19 @@ public class Exemplar extends Material implements Serializable {
     }
 
     public Localizacao getLocalizacao() {
-        return localizacao;
+        return this.localizacao;
+    }
+    
+    public String parseLocalizacao() {
+        if (localizacao == Localizacao.DISPONIVEL) {
+            return "Disponível";
+        } else if (localizacao == Localizacao.EMPRESTADO) {
+            return "Emprestado";
+        } else if (localizacao == Localizacao.PROCESSAMENTO) {
+            return "Processamento";
+        } else {
+            return "Restuaro";
+        }
     }
 
     public boolean isEmprestado() {
@@ -94,11 +111,17 @@ public class Exemplar extends Material implements Serializable {
     public void setReservado(boolean reservado) {
         this.reservado = reservado;
     }
+    
+    public LocalDate getDataEmprestimo() {
+        return this.dataEmprestimo;
+    }
 
     public boolean emprestar() {
         // Lógica para emprestar o exemplar
         if (!emprestado && !reservado) {
             emprestado = true;
+            dataEmprestimo = LocalDate.now();
+            localizacao = Localizacao.EMPRESTADO;
             System.out.println("Exemplar emprestado com sucesso.");
             
             return true;
@@ -128,6 +151,7 @@ public class Exemplar extends Material implements Serializable {
         if (emprestado && renovacoes < 2) {
             System.out.println("Empréstimo renovado com sucesso.");
             renovacoes++;
+            dataEmprestimo = LocalDate.now();
             
             return true;
         } else {
@@ -143,6 +167,8 @@ public class Exemplar extends Material implements Serializable {
             emprestado = false;
             renovacoes = 0;
             reservado = false;
+            dataEmprestimo = null;
+            localizacao = Localizacao.DISPONIVEL;
             
             System.out.println("Exemplar devolvido com sucesso.");
             
