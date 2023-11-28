@@ -29,7 +29,6 @@ public abstract class Usuario implements Serializable {
     protected int numMateriais;
      
     final ArrayList<Exemplar> exemplaresEmprestados;
-    final ArrayList<LocalDate> dataEmprestimos;
 
     public Usuario(String nome, String cpf, String email, String senha, LocalDate dataDeNascimento) {
         this.nome = nome;
@@ -42,7 +41,6 @@ public abstract class Usuario implements Serializable {
         this.suspenso = false;
         
         this.exemplaresEmprestados = new ArrayList();
-        this.dataEmprestimos = new ArrayList();
     }
     
     public abstract String parseTipoUsuario();
@@ -77,7 +75,6 @@ public abstract class Usuario implements Serializable {
         boolean podeRenovar = exemplar.renovar();
         if (!podeRenovar) return false;
         
-        this.dataEmprestimos.set(exemplarIndex, LocalDate.now());
         return true;
     }
     
@@ -88,7 +85,6 @@ public abstract class Usuario implements Serializable {
         if (!podeEmprestar) return false;
         
         this.exemplaresEmprestados.add(exemplar);
-        this.dataEmprestimos.add(LocalDate.now());
         
         return true;
     }
@@ -99,23 +95,32 @@ public abstract class Usuario implements Serializable {
         
         boolean podeDevolver = exemplar.devolver();
         if (!podeDevolver) return false;
-
-        long numDiasAtraso = ChronoUnit.DAYS.between(
-                this.dataEmprestimos.get(exemplarIndex),
-                LocalDate.now()
-        );
-
-        if (numDiasAtraso > this.numDias) {
-            this.multaTotal =  exemplar.getValorMulta() * numDiasAtraso;
-            if (this.multaTotal > 0) {
-                this.suspenso = true;
-            }
-        }
+        
+        this.atualizarSuspenso();
 
         this.exemplaresEmprestados.remove(exemplarIndex);
-        this.dataEmprestimos.remove(exemplarIndex);
 
         return true;
+    }
+    
+    public void atualizarSuspenso() {
+        for (int i = 0; i < this.exemplaresEmprestados.size(); i++) {
+            Exemplar exemplar = this.exemplaresEmprestados.get(i);
+            
+            if (exemplar.getDataEmprestimo() == null) continue;
+        
+            long numDiasAtraso = ChronoUnit.DAYS.between(
+                    exemplar.getDataEmprestimo(),
+                    LocalDate.now()
+            );
+
+            if (numDiasAtraso > this.numDias) {
+                this.multaTotal =  exemplar.getValorMulta() * numDiasAtraso;
+                if (this.multaTotal > 0) {
+                    this.suspenso = true;
+                }
+            }
+        }
     }
 
     public String getNome() {
