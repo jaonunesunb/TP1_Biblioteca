@@ -33,12 +33,13 @@ public class CadastroExemplares extends javax.swing.JFrame {
     ArrayList<Material> materials;
     ArrayList<Exemplar> exemplares;
     Material selectedMaterial;
+    ConsultaMateriais parent;
     
-    public CadastroExemplares(Material material) {
+    public CadastroExemplares(Material material, ConsultaMateriais parent) {
         initComponents();
         
         this.selectedMaterial = material;
-        
+        this.parent = parent;
         this.loadMaterials();
         this.loadExemplares();
         
@@ -365,7 +366,11 @@ public class CadastroExemplares extends javax.swing.JFrame {
             this.setVisible(false);
             
             JOptionPane.showMessageDialog(null, "Exemplar adicionado com sucesso!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
-        }     
+        }    
+        this.parent.loadMateriais();
+        this.parent.loadExemplares();
+        
+        this.parent.carregarDadosTabelaExemplares();
     }//GEN-LAST:event_btnSalvarExemplarActionPerformed
 
     private void cmbLocalExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLocalExemplarActionPerformed
@@ -410,7 +415,7 @@ public class CadastroExemplares extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroExemplares(null).setVisible(true);
+                new CadastroExemplares(null, null).setVisible(true);
             }
         });
     }

@@ -9,8 +9,10 @@ import infosphere.Material;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +90,20 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    private void resetState() {
+        btnNovoExemplar.setEnabled(true);
+        btnEditarExemplar.setEnabled(false);
+        btnDeletarExemplar.setEnabled(false);
+        btnAcessarMaterial.setEnabled(true);
+
+        txfCodAcervo.setEnabled(false);
+        txfTitulo.setEnabled(false);
+        txfAutor.setEnabled(false);
+        txaDescricao.setEnabled(false);
+        cmbTipoMaterial.setEnabled(false);
+
+        
     }
 
     /**
@@ -335,6 +351,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         });
 
         btnExcluirMaterial.setText("Excluir material");
+        btnExcluirMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirMaterialActionPerformed(evt);
+            }
+        });
 
         btnNovoExemplar.setText("Novo exemplar");
         btnNovoExemplar.addActionListener(new java.awt.event.ActionListener() {
@@ -344,6 +365,11 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         });
 
         btnDeletarExemplar.setText("Deletar exemplar");
+        btnDeletarExemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarExemplarActionPerformed(evt);
+            }
+        });
 
         btnEditarExemplar.setText("Editar exemplar");
         btnEditarExemplar.addActionListener(new java.awt.event.ActionListener() {
@@ -481,35 +507,13 @@ public class ConsultaMateriais extends javax.swing.JFrame {
         tblMateriais.setModel(modelo);
         // carregarDadosTabelaExemplares();
     }
-    
-    private void carregarDadosTabelaExemplares() {
-        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Exemplar", 
-            "Reimpressão", "Disponível", "Localização", "Núm. renov"}, 0);
-
-        // Itera sobre os materiais para acessar os exemplares de cada material
-        for (Material mat : this.materiais) {
-            List<Exemplar> exemplaresMaterial = mat.getExemplaresMaterial();
-            for (Exemplar ex : exemplaresMaterial) {
-                Object linha[] = new Object[] {
-                    ex.getCodigoExemplar(),
-                    ex.getReimpr(),
-                    ex.isEmprestado(),
-                    ex.getLocalizacao(),
-                    ex.getRenovacoes(),
-                };
-                modelo.addRow(linha);
-            }
-        }
-        
-        tblExemplares.setModel(modelo);
-    }
 
     private void carregarTabelaMateriaisFiltrada(String titulo, String codAcervo) {
         DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Acervo", "Edição", "Título"}, 0);
         
         for (int i = 0; i < this.materiais.size(); i++){
             if (this.materiais.get(i).getNome().toLowerCase().contains(titulo.toLowerCase())
-                    || this.materiais.get(i).getCodigoAcervo().contains(codAcervo)
+                    || this.materiais.get(i).getCodigoAcervo().equals(codAcervo)
             ) {
                 Object[] linha = new Object[]{
                     this.materiais.get(i).getCodigoAcervo(),
@@ -518,7 +522,6 @@ public class ConsultaMateriais extends javax.swing.JFrame {
                 };
 
                 modelo.addRow(linha);
-                carregarDadosTabelaExemplares();
             }
         }
         
@@ -537,12 +540,12 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     
     private void btnSearchByTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByTituloActionPerformed
         String titulo = txfSearchTitulo.getText();
-        carregarTabelaMateriaisFiltrada(titulo, "");
+        carregarTabelaMateriaisFiltrada(titulo, "ISSO_NAO_EXISTE_SDFSHDFHJDSF");
     }//GEN-LAST:event_btnSearchByTituloActionPerformed
 
     private void btnSearchByCodAcervoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchByCodAcervoActionPerformed
         String codAcervo = txfSearchCodAcervo.getText();
-        carregarTabelaMateriaisFiltrada("", codAcervo);
+        carregarTabelaMateriaisFiltrada("ISSO_NAO_EXISTE_SDFSHDFHJDSF", codAcervo);
     }//GEN-LAST:event_btnSearchByCodAcervoActionPerformed
 
     private void btnNovoMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMaterialActionPerformed
@@ -559,14 +562,39 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     }
     
     private void btnNovoExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoExemplarActionPerformed
-        CadastroExemplares cadastroExemplares = new CadastroExemplares(selectedMaterial);
+        CadastroExemplares cadastroExemplares = new CadastroExemplares(selectedMaterial, this);
         cadastroExemplares.setVisible(true);
     }//GEN-LAST:event_btnNovoExemplarActionPerformed
 
     private void tblMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMateriaisMouseClicked
-        
-        
+        carregarDadosTabelaExemplares();
     }//GEN-LAST:event_tblMateriaisMouseClicked
+    
+    protected void carregarDadosTabelaExemplares() {
+        DefaultTableModel modelo = new DefaultTableModel(new Object[] {"Cód. Exemplar", 
+            "Reimpressão", "Disponível", "Localização", "Núm. renov"}, 0);
+
+        // Itera sobre os materiais para acessar os exemplares de cada material
+        for (Material material : this.materiais) {
+            if (material.getCodigoAcervo().contains(txfCodAcervo.getText())) {
+                List<Exemplar> exemplaresMaterial = material.getExemplaresMaterial();
+                for (Exemplar exemplar : exemplaresMaterial) {
+                    Object linha[] = new Object[] {
+                        exemplar.getCodigoExemplar(),
+                        exemplar.getReimpr(),
+                        exemplar.isDisp(),
+                        exemplar.getLocalizacao(),
+                        exemplar.getRenovacoes()
+                    };
+                    modelo.addRow(linha);
+                    System.out.println(exemplar.parseLocalizacao());
+                }
+                
+            }
+        }
+
+        tblExemplares.setModel(modelo);
+}
 
     private void btnSairMateriaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairMateriaisActionPerformed
         this.setVisible(false);
@@ -575,14 +603,114 @@ public class ConsultaMateriais extends javax.swing.JFrame {
     private void tblExemplaresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExemplaresMouseClicked
         int i = tblExemplares.getSelectedRow();
         btnEditarExemplar.setEnabled(true);
-        btnExcluirMaterial.setEnabled(true);
+        btnDeletarExemplar.setEnabled(true);
         //get(i).setId(id);
     }//GEN-LAST:event_tblExemplaresMouseClicked
 
     private void btnEditarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarExemplarActionPerformed
-        int i = tblExemplares.getSelectedRow();
+        int j = tblExemplares.getSelectedRow();
         
+        /*for (int i = 0; i < exemplares.size(); i++) {
+               Exemplar currentUser = exemplares.get(i);
+                int editingUserIndex = i;
+            }
+        
+
+        CadastroExemplares.txtCodExemp.setText("");
+        this.txfEmail.setText(currentUser.getEmail());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.txfData.setText(currentUser.getDataDeNascimento().format(formatter));
+
+        this.txfNome.setText(currentUser.getNome());
+        this.txfSenha.setText(currentUser.getSenha());
+
+        btnNovoUsuario.setEnabled(false);
+        bntPesquisar.setEnabled(false);
+
+        bntSalvarUsuario.setEnabled(true);
+        bntCancelar.setEnabled(true);
+
+        txfCpf.setEnabled(true);
+        txfEmail.setEnabled(true);
+        cmbFuncao.setEnabled(true);
+        txfData.setEnabled(true);
+        txfNome.setEnabled(true);
+        txfSenha.setEnabled(true);
+
+        txfCpf.requestFocus();
+        */
     }//GEN-LAST:event_btnEditarExemplarActionPerformed
+    private void saveMaterials() {
+        try {
+            FileOutputStream fos = new FileOutputStream("materials.tmp");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.materiais);
+            oos.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, String.format("Erro aconteceu enquanto tentava salvar usuários: %s", e), "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            System.out.println(e);
+        }
+    }
+    private void btnExcluirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMaterialActionPerformed
+        int j = tblMateriais.getSelectedRow();
+        Material currentMaterial = materiais.get(j);
+        if (materiais.get(j).getCodigoAcervo() == null) {
+            JOptionPane.showMessageDialog(null, "Nenhum usário selecionado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+        // Encontrar material com Cod Acervo
+        int materialIndex = -1;
+        for (int i = 0; i < materiais.size(); i++) {
+            if (materiais.get(i).getCodigoAcervo().equals(currentMaterial.getCodigoAcervo())) {
+                materialIndex = i;
+            }
+        }
+        
+        materiais.remove(materialIndex);
+        JOptionPane.showMessageDialog(null, "Material excluído com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+
+        this.saveMaterials();
+        this.resetState();
+        carregarDadosTabelaMaterial();
+    }//GEN-LAST:event_btnExcluirMaterialActionPerformed
+
+    private void btnDeletarExemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarExemplarActionPerformed
+        int selectedRowIndex = tblExemplares.getSelectedRow();
+        if (selectedRowIndex == -1) {
+            JOptionPane.showMessageDialog(null, "Nenhum exemplar selecionado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
+
+        String codExemplar = tblExemplares.getValueAt(selectedRowIndex, 0).toString();
+        Material materialSelecionado = materiais.get(selectedRowIndex);
+
+        List<Exemplar> exemplaresMaterial = materialSelecionado.getExemplaresMaterial();
+        int exemplarIndex = -1;
+
+        // Encontrar o índice do exemplar na lista
+        for (int i = 0; i < exemplaresMaterial.size(); i++) {
+            if (exemplaresMaterial.get(i).getCodigoExemplar().equals(codExemplar)) {
+                exemplarIndex = i;
+                break; // Se encontrou, podemos parar o loop
+            }
+        }
+
+        if (exemplarIndex != -1) {
+            exemplaresMaterial.remove(exemplarIndex); // Remove o exemplar da lista do material
+            JOptionPane.showMessageDialog(null, "Exemplar excluído com sucesso", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+
+            // Salvar as alterações
+            this.saveMaterials();
+
+            // Recarregar as tabelas
+            carregarDadosTabelaMaterial();
+            carregarDadosTabelaExemplares();
+        } else {
+            JOptionPane.showMessageDialog(null, "Exemplar não encontrado", "Mensagem", JOptionPane.PLAIN_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnDeletarExemplarActionPerformed
 
     /**
      * @param args the command line arguments

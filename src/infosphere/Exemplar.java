@@ -45,7 +45,7 @@ public class Exemplar extends Material implements Serializable {
         this.valorMulta = 0.0;
         this.emprestado = false;
         this.reservado = false;
-        this.localizacao = Localizacao.DISPONIVEL;
+        this.localizacao = localizacao;
     }
     
     public String getCodigoExemplar() {
@@ -90,6 +90,10 @@ public class Exemplar extends Material implements Serializable {
 
     public boolean isEmprestado() {
         return emprestado;
+    }
+    
+     public boolean isDisp() {
+        return !emprestado;
     }
 
     public Double getValorMulta() {

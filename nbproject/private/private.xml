@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/Emprestimo.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/Principal.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/Cadastro.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/CadastroMateriais.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/CadastroExemplares.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/telas/Devolucao.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/infosphere/Exemplar.java</file>
-            <file>file:/Users/mateusoliveirasantos/NetBeansProjects/Biblioteca/src/infosphere/Usuario.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/telas/CadastroExemplares.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/infosphere/Exemplar.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/telas/Principal.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/infosphere/Docente.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/telas/Cadastro.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/infosphere/Localizacao.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/telas/ConsultaMateriais.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/telas/CadastroMateriais.java</file>
+            <file>file:/C:/Users/Pegad/OneDrive/Documentos/NetBeansProjects/Projeto%20Grupo%208/TP1_Biblioteca/src/infosphere/Estudante.java</file>
         </group>
     </open-files>
 </project-private>
